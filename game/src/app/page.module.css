@@ -1,21 +1,16 @@
 .page {
-  --background: #fafafa;
-  --foreground: #fff;
+  background-image: url("/jpg/main_menu_bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
+  height: 100vh;
+  width: 100%;
 
   display: flex;
-  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
 }
 
 .main {
