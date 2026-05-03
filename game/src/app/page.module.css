@@ -14,6 +14,28 @@
   position: relative;
 }
 
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+  color: #fffdd0;
+  text-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+  line-height: 0.8;
+}
+
+.title_top {
+  align-self: flex-start;
+  margin-left: 3px;
+  font-size: 90px;
+}
+
+.title_bottom {
+  text-align: center;
+  font-size: 90px;
+  margin-bottom: 160px;
+}
+
 .button {
   background-color: #fffdd0;
   box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
