@@ -9,6 +9,7 @@ export default function Home() {
         <button className={styles.level_button}>2</button>
         <button className={styles.level_button}>3</button>
         <button className={styles.level_button}>4</button>
+        <button className={styles.help_button}>?</button>
       </div>
     </div>
   );
