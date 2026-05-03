@@ -14,27 +14,26 @@
   position: relative;
 }
 
-.level_button {
+.button {
   background-color: #fffdd0;
-  border-radius: 25px;
   box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-  width: 135px;
-  height: 135px;
-  box-sizing: border-box;
   border: 2px solid #fffdd033;
+  box-sizing: border-box;
 }
 
-.help_button {
-  background-color: #fffdd0;
-  border-radius: 100px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+.button_level {
+  border-radius: 25px;
   width: 135px;
   height: 135px;
-  box-sizing: border-box;
-  border: 2px solid #fffdd033;
-  position: absolute;
+}
+
+.button_help {
+  border-radius: 100px;
+  width: 135px;
+  height: 135px;
   bottom: 20px;
   right: 20px;
+  position: absolute;
 }
 
 .level_button_array {
