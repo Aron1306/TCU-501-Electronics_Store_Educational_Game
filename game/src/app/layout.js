@@ -1,5 +1,11 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { Baloo_2 } from "next/font/google";
 import "./globals.css";
+
+const baloo2 = Baloo_2({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,7 +25,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+      <body className={baloo2.className}>
+        {children}
+      </body>
     </html>
   );
 }
