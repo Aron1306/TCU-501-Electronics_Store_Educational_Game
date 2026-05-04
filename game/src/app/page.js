@@ -28,7 +28,9 @@ export default function Home() {
           <div className={styles.dot} style={{ gridArea: "3 / 3" }}></div>
         </button>
       </div>
-      <button className={`${styles.button} ${styles.button_help}`}></button>
+      <button className={`${styles.button} ${styles.button_help}`}>
+        <span className={styles.help_text}>?</span>
+      </button>
     </div>
   );
 }
