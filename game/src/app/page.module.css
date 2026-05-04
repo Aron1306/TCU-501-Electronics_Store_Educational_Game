@@ -27,13 +27,13 @@
 .title_top {
   align-self: flex-start;
   margin-left: 3px;
-  font-size: 90px;
+  font-size: clamp(100px, 6vw, 90px);
 }
 
 .title_bottom {
   text-align: center;
-  font-size: 90px;
-  margin-bottom: 160px;
+  margin-bottom: clamp(40px, 10vh, 160px);
+  font-size: clamp(100px, 6vw, 90px);
 }
 
 .button {
@@ -44,23 +44,24 @@
 }
 
 .button_level {
-  border-radius: 25px;
-  width: 135px;
-  height: 135px;
+  width: clamp(180px, 8vw, 135px);
+  height: clamp(180px, 8vw, 135px);
+  border-radius: clamp(12px, 2vw, 25px);
 }
 
 .button_help {
   border-radius: 100px;
-  width: 135px;
-  height: 135px;
-  bottom: 20px;
-  right: 20px;
+  width: clamp(80px, 8vw, 135px);
+  height: clamp(80px, 8vw, 135px);
+
+  bottom: clamp(10px, 2vh, 20px);
+  right: clamp(10px, 2vw, 20px);
   position: absolute;
 }
 
 .level_button_array {
   display: flex;
-  gap: 30px;
+  gap: clamp(10px, 2vw, 30px);
   justify-content: center;
   align-items: center;
 }
