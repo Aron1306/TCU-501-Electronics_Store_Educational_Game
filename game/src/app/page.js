@@ -1,9 +1,30 @@
-import Image from "next/image";
+"use client";
+import { useEffect, useRef } from "react";
 import styles from "./page.module.css";
 
 export default function Home() {
+  /*For background music*/
+  const audioRef = useRef(null);
+  useEffect(() => {
+    const audio = audioRef.current;
+    audio.volume = 0.3;
+    const playAudio = () => {
+      audio.play().catch(() => {
+      });
+    };
+    playAudio();
+    window.addEventListener("click", playAudio);
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+      window.removeEventListener("click", playAudio);
+    };
+  }, []);
   return (
     <div className={styles.page}>
+      <audio ref={audioRef} loop>
+        <source src="/mp3/767856__sunixmuz__sunixmuz-bizarre-place-free-ccby.mp3" type="audio/mpeg" />
+      </audio>
       <h1 className={styles.title}>
         <span className={styles.title_top}>At The</span>
         <span className={styles.title_bottom}>Electronics Store</span>
@@ -30,6 +51,9 @@ export default function Home() {
       </div>
       <button className={`${styles.button} ${styles.button_help}`}>
         <span className={styles.help_text}>?</span>
+      </button>
+      <button onClick={() => (audioRef.current.muted = !audioRef.current.muted)}>
+      🔇
       </button>
     </div>
   );
