@@ -52,7 +52,7 @@ export default function Home() {
       <button className={`${styles.button} ${styles.button_help}`}>
         <span className={styles.help_text}>?</span>
       </button>
-      <button onClick={() => (audioRef.current.muted = !audioRef.current.muted)}>
+      <button className={`${styles.button} ${styles.button_mute}`} onClick={() => {audioRef.current.muted = !audioRef.current.muted}}>
       🔇
       </button>
     </div>
