@@ -81,6 +81,28 @@
   transform: scale(0.95);
 }
 
+.button_mute {
+  top: clamp(10px, 2vh, 20px);
+  right: clamp(10px, 2vw, 20px);
+  width: clamp(5px, 8vw, 60px);
+  height: clamp(5px, 8vw, 60px);
+  font-size: clamp(5px, 4vw, 35px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  position: absolute;
+  transition: transform 0.2s ease;
+}
+
+.button_mute:hover {
+  transform: scale(1.15);
+}
+
+.button_mute:active {
+  transform: scale(0.95);
+}
+
 .level_button_array {
   display: flex;
   gap: clamp(10px, 2vw, 30px);
