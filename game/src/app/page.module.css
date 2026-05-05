@@ -51,16 +51,34 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   place-items: center;
+  transition: transform 0.2s ease;
+}
+
+.button_level:hover {
+  transform: scale(1.1) rotate(2deg);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
+}
+
+.button_level:active {
+  transform: scale(0.95);
 }
 
 .button_help {
   border-radius: 100px;
   width: clamp(80px, 8vw, 135px);
   height: clamp(80px, 8vw, 135px);
-
   bottom: clamp(10px, 2vh, 20px);
   right: clamp(10px, 2vw, 20px);
   position: absolute;
+  transition: transform 0.2s ease;
+}
+
+.button_help:hover {
+  transform: scale(1.15);
+}
+
+.button_help:active {
+  transform: scale(0.95);
 }
 
 .level_button_array {
