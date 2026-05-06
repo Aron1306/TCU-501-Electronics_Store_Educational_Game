@@ -2,7 +2,18 @@
 import { useEffect, useRef } from "react";
 import styles from "./page.module.css";
 
-export default function Home() {  
+export default function Home() {
+  /*For click sounds*/
+  const clickSoundRef = useRef(null);
+  useEffect(() => {
+    clickSoundRef.current = new Audio("/audio/611962__cmartins10__press-button.wav");
+  }, []);
+  const playClick = () => {
+    const sound = clickSoundRef.current;
+    sound.currentTime = 0;
+    sound.play();
+  };
+
   /*For background music*/
   const audioRef = useRef(null);
   useEffect(() => {
@@ -30,26 +41,26 @@ export default function Home() {
         <span className={styles.title_bottom}>Electronics Store</span>
       </h1>
       <div className={styles.level_button_array}>
-        <button className={`${styles.button} ${styles.button_level}`}>
+        <button className={`${styles.button} ${styles.button_level}`} onClick={playClick}>
           <div className={styles.dot} style={{ gridArea: "2 / 2" }}></div>
         </button>
-        <button className={`${styles.button} ${styles.button_level}`}>
+        <button className={`${styles.button} ${styles.button_level}`} onClick={playClick}>
           <div className={styles.dot} style={{ gridArea: "1 / 1" }}></div>
           <div className={styles.dot} style={{ gridArea: "3 / 3" }}></div>
         </button>
-        <button className={`${styles.button} ${styles.button_level}`}>
+        <button className={`${styles.button} ${styles.button_level}`} onClick={playClick}>
           <div className={styles.dot} style={{ gridArea: "1 / 1" }}></div>
           <div className={styles.dot} style={{ gridArea: "2 / 2" }}></div>
           <div className={styles.dot} style={{ gridArea: "3 / 3" }}></div>
         </button>
-        <button className={`${styles.button} ${styles.button_level}`}>
+        <button className={`${styles.button} ${styles.button_level}`} onClick={playClick}>
           <div className={styles.dot} style={{ gridArea: "1 / 1" }}></div>
           <div className={styles.dot} style={{ gridArea: "1 / 3" }}></div>
           <div className={styles.dot} style={{ gridArea: "3 / 1" }}></div>
           <div className={styles.dot} style={{ gridArea: "3 / 3" }}></div>
         </button>
       </div>
-      <button className={`${styles.button} ${styles.button_help}`}>
+      <button className={`${styles.button} ${styles.button_help}`} onClick={playClick}>
         <span className={styles.help_text}>?</span>
       </button>
       <button className={`${styles.button} ${styles.button_mute}`} onClick={() => {audioRef.current.muted = !audioRef.current.muted}}>
