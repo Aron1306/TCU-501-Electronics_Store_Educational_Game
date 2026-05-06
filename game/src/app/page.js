@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import styles from "./page.module.css";
 
-export default function Home() {
+export default function Home() {  
   /*For background music*/
   const audioRef = useRef(null);
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <audio ref={audioRef} loop>
-        <source src="/mp3/767856__sunixmuz__sunixmuz-bizarre-place-free-ccby.mp3" type="audio/mpeg" />
+        <source src="/audio/767856__sunixmuz__sunixmuz-bizarre-place-free-ccby.mp3" type="audio/mpeg" />
       </audio>
       <h1 className={styles.title}>
         <span className={styles.title_top}>At The</span>
