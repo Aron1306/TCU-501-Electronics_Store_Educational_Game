@@ -23,61 +23,61 @@ export const display_text = {
         {
           text: "I need something to call my parents.",
           answer: "phone",
-          audio_female: ["level1_text1_female1.mp3, level1_text1_female2.mp3"],
+          audio_female: ["level1_text1_female1.mp3", "level1_text1_female2.mp3"],
           audio_male: ["level1_text1_male1.mp3"]
         },
         {
           text: "I want a big screen to watch movies.",
           answer: "television",
-          audio_female: ["level1_text2_female1.mp3, level1_text2_female2.mp3"],
+          audio_female: ["level1_text2_female1.mp3", "level1_text2_female2.mp3"],
           audio_male: ["level1_text2_male1.mp3"]
         },
         {
           text: "I need something to do my homework.",
           answer: "computer",
-          audio_female: ["level1_text3_female1.mp3, level1_text3_female2.mp3"],
+          audio_female: ["level1_text3_female1.mp3", "level1_text3_female2.mp3"],
           audio_male: ["level1_text3_male1.mp3"]
         },
         {
           text: "I want to listen to music.",
           answer: "headphones",
-          audio_female: ["level1_text4_female1.mp3, level1_text4_female2.mp3"],
+          audio_female: ["level1_text4_female1.mp3", "level1_text4_female2.mp3"],
           audio_male: ["level1_text4_male1.mp3"]
         },
         {
           text: "I need a small device to take photos.",
           answer: "camera",
-          audio_female: ["level1_text5_female1.mp3, level1_text5_female2.mp3"],
+          audio_female: ["level1_text5_female1.mp3", "level1_text5_female2.mp3"],
           audio_male: ["level1_text5_male1.mp3"]
         },
         {
           text: "I want to play video games at home.",
           answer: "console",
-          audio_female: ["level1_text6_female1.mp3, level1_text6_female2.mp3"],
+          audio_female: ["level1_text6_female1.mp3", "level1_text6_female2.mp3"],
           audio_male: ["level1_text6_male1.mp3"]
         },
         {
           text: "I need a big screen to read books.",
           answer: "tablet",
-          audio_female: ["level1_text7_female1.mp3, level1_text7_female2.mp3"],
+          audio_female: ["level1_text7_female1.mp3", "level1_text7_female2.mp3"],
           audio_male: ["level1_text7_male1.mp3"]
         },
         {
           text: "I need something to write on my computer.",
           answer: "keyboard",
-          audio_female: ["level1_text8_female1.mp3, level1_text8_female2.mp3"],
+          audio_female: ["level1_text8_female1.mp3", "level1_text8_female2.mp3"],
           audio_male: ["level1_text8_male1.mp3"]
         },
         {
           text: "I want a computer I can take outside.",
           answer: "laptop",
-          audio_female: ["level1_text9_female1.mp3, level1_text9_female2.mp3"],
+          audio_female: ["level1_text9_female1.mp3", "level1_text9_female2.mp3"],
           audio_male: ["level1_text9_male1.mp3"]
         },
         {
           text: "I need my friends to hear me online.",
           answer: "microphone",
-          audio_female: ["level1_text10_female1.mp3, level1_text10_female2.mp3"],
+          audio_female: ["level1_text10_female1.mp3", "level1_text10_female2.mp3"],
           audio_male: ["level1_text10_male1.mp3"]
         },
       ]
@@ -105,31 +105,31 @@ export const display_text = {
         {
           text: "Hi, I need a yellow phone. I only want to call.",
           answer: "We only have green phones here.",
-          audio_female: ["level2_text1_female1.mp3, level1_text1_female2.mp3"],
+          audio_female: ["level2_text1_female1.mp3", "level2_text1_female2.mp3"],
           audio_male: ["level2_text1_male1.mp3"]
         },
         {
           text: "Hello, I want a tablet for games. Not too expensive.",
           answer: "This one is good for only 50 dollars!",
-          audio_female: ["level2_text2_female1.mp3, level1_text2_female2.mp3"],
+          audio_female: ["level2_text2_female1.mp3", "level2_text2_female2.mp3"],
           audio_male: ["level2_text2_male1.mp3"]
         },
         {
           text: "I need a laptop for school.",
           answer: "This one is fast and good for your studies.",
-          audio_female: ["level2_text3_female1.mp3, level1_text3_female2.mp3"],
+          audio_female: ["level2_text3_female1.mp3", "level2_text3_female2.mp3"],
           audio_male: ["level2_text3_male1.mp3"]
         },
         {
           text: "Hi, I want headphones.",
           answer: "These are good for loud music.",
-          audio_female: ["level2_text4_female1.mp3, level1_text4_female2.mp3"],
+          audio_female: ["level2_text4_female1.mp3", "level2_text4_female2.mp3"],
           audio_male: ["level2_text4_male1.mp3"]
         },
         {
           text: "I need a really expensive computer for games.",
           answer: " Yes, a million dollars please!",
-          audio_female: ["level2_text5_female1.mp3, level1_text5_female2.mp3"],
+          audio_female: ["level2_text5_female1.mp3", "level2_text5_female2.mp3"],
           audio_male: ["level2_text5_male1.mp3"]
         },
       ]
