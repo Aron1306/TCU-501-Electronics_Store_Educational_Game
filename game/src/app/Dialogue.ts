@@ -59,7 +59,7 @@ export const display_text = {
         {
           text: "I need a big screen to read books.",
           answer: "tablet",
-          audio_female: ["level1_text7_female1.mp3, level1_text87_female2.mp3"],
+          audio_female: ["level1_text7_female1.mp3, level1_text7_female2.mp3"],
           audio_male: ["level1_text7_male1.mp3"]
         },
         {
