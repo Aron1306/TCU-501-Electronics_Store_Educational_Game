@@ -55,7 +55,7 @@ export const display_text = {
           audio: "placeholder" /*TODO*/
         },
         {
-          text: "I need something to write on my computer",
+          text: "I need something to write on my computer.",
           answer: "keyboard",
           audio: "placeholder" /*TODO*/
         },
@@ -65,7 +65,7 @@ export const display_text = {
           audio: "placeholder" /*TODO*/
         },
         {
-          text: "I need my friends to hear me online",
+          text: "I need my friends to hear me online.",
           answer: "microphone",
           audio: "placeholder" /*TODO*/
         },
@@ -107,7 +107,7 @@ export const display_text = {
           audio: "placeholder" /*TODO*/
         },
         {
-          text: "Hi, I want headphones. ",
+          text: "Hi, I want headphones.",
           answer: "These are good for loud music.",
           audio: "placeholder" /*TODO*/
         },
