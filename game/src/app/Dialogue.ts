@@ -129,7 +129,7 @@ export const display_text = {
         },
         {
           text: "I need a really expensive computer for games.",
-          answer: " Yes, a million dollars please!",
+          answer: "Yes, a million dollars please!",
           audio_female: ["level2_text5_female1.mp3", "level2_text5_female2.mp3"],
           audio_male: ["level2_text5_male1.mp3"]
         },
