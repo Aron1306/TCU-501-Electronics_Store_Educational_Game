@@ -83,6 +83,7 @@ export const display_text = {
       ]
   },
   level2: {
+      audio_prefix: "/audio/dialogue/level2/",
       instructions: {
         english: [
             "You will work as a clerk in an Electronics Store.",
