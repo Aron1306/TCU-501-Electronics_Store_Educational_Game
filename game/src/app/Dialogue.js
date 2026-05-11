@@ -106,30 +106,35 @@ export const display_text = {
         {
           text: "Hi, I need a yellow phone. I only want to call.",
           answer: "We only have green phones here.",
+          answer_audio: ["level2_answer1_male.mp3","level2_answer1_female.mp3"],
           audio_female: ["level2_text1_female1.mp3", "level2_text1_female2.mp3"],
           audio_male: ["level2_text1_male1.mp3"]
         },
         {
           text: "Hello, I want a tablet for games. Not too expensive.",
           answer: "This one is good for only 50 dollars!",
+          answer_audio: ["level2_answer2_male.mp3","level2_answer2_female.mp3"],
           audio_female: ["level2_text2_female1.mp3", "level2_text2_female2.mp3"],
           audio_male: ["level2_text2_male1.mp3"]
         },
         {
           text: "I need a laptop for school.",
           answer: "This one is fast and good for your studies.",
+          answer_audio: ["level2_answer3_male.mp3","level2_answer3_female.mp3"],
           audio_female: ["level2_text3_female1.mp3", "level2_text3_female2.mp3"],
           audio_male: ["level2_text3_male1.mp3"]
         },
         {
           text: "Hi, I want headphones.",
           answer: "These are good for loud music.",
+          answer_audio: ["level2_answer4_male.mp3","level2_answer4_female.mp3"],
           audio_female: ["level2_text4_female1.mp3", "level2_text4_female2.mp3"],
           audio_male: ["level2_text4_male1.mp3"]
         },
         {
           text: "I need a really expensive computer for games.",
           answer: "Yes, a million dollars please!",
+          answer_audio: ["level2_answer5_male.mp3","level2_answer5_female.mp3"],
           audio_female: ["level2_text5_female1.mp3", "level2_text5_female2.mp3"],
           audio_male: ["level2_text5_male1.mp3"]
         },
@@ -215,27 +220,31 @@ export const display_text = {
         options: [
           "You can call people",
           "You can send messages"
-        ]
+        ],
+        answer_audio: ["level4_answer1-1_male.mp3","level4_answer1-1_female.mp3", "level4_answer1-2_male.mp3", "level5_answer1-2_female.mp3"],
       },
       {
         device: "laptop",
         options: [
           "You can do homework",
           "You can use the internet"
-        ]
+        ],
+        answer_audio: ["level4_answer2-1_male.mp3","level4_answer2-1_female.mp3", "level4_answer2-2_male.mp3", "level5_answer2-2_female.mp3"],
       },
       {
         device: "console",
         options: [
           "You can play video games",
           "You can play with friends"
-        ]
+        ],
+        answer_audio: ["level4_answer3-1_male.mp3","level4_answer3-1_female.mp3", "level4_answer3-2_male.mp3", "level5_answer3-2_female.mp3"],
       },
       {
         device: "headphones",
         options: [
           "You can listen to music"
-        ]
+        ],
+        answer_audio: ["level4_answer4-1_male.mp3","level4_answer4-1_female.mp3"],
       },
       {
         device: "tablet",
@@ -243,7 +252,10 @@ export const display_text = {
           "You can read books",
           "You can watch videos",
           "You can play games"
-        ]
+        ],
+        answer_audio: ["level4_answer5-1_male.mp3","level4_answer5-1_female.mp3", "level4_answer5-2_male.mp3", "level5_answer5-2_female.mp3",
+          "level4_answer5-3_male.mp3", "level5_answer5-3_female.mp3"
+        ],
       }
     ]
   }
