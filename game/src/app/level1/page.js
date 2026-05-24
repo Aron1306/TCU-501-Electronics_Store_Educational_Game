@@ -18,15 +18,19 @@ export default function Home() {
     /*Handle items being dropped in the designed area*/
     const handleDrop = (e) => {
         e.preventDefault();
-        const device = e.dataTransfer.getData("text/plain");
 
-        if (device === gameState.devices_array[gameState.correct_device_pos]){
-            /* Do something */
+        const data = e.dataTransfer.getData("deviceIndex");
+
+        if (data === "") return; // <- ignora drops externos
+
+        const index = Number(data);
+
+        if (index === gameState.correct_device_pos) {
+            console.log("correcto");
         } else {
-            /* Do something */
+            console.log("incorrecto");
         }
 
-        /* Next customer */
         regenerate();
     };
 
@@ -115,7 +119,7 @@ export default function Home() {
                         key={i}
                         draggable
                         onDragStart={(e) =>
-                        e.dataTransfer.setData("text/plain", device)
+                            e.dataTransfer.setData("deviceIndex", i)
                         }
                     >
                         <img
@@ -131,6 +135,7 @@ export default function Home() {
             src={"/image/assets/counter.png"}
             className={styles.counter}
             alt="counter"
+            draggable={false}
         />
         <div
             className={styles.customer_slot}
