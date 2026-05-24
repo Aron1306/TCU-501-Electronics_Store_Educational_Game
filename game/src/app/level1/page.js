@@ -19,6 +19,15 @@ export default function Home() {
     const handleDrop = (e) => {
         e.preventDefault();
         const device = e.dataTransfer.getData("text/plain");
+
+        if (device === gameState.devices_array[gameState.correct_device_pos]){
+            /* Do something */
+        } else {
+            /* Do something */
+        }
+
+        /* Next customer */
+        regenerate();
     };
 
     /* Randomly decide a customer and their voice */
@@ -123,8 +132,10 @@ export default function Home() {
             className={styles.counter}
             alt="counter"
         />
-        <img
+        <div
             className={styles.customer_slot}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={handleDrop}
         />
     </div>
   );
