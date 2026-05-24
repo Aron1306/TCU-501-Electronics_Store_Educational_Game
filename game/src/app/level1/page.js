@@ -96,17 +96,10 @@ export default function Home() {
         {gameState && (
             <>
                 <img
-                    src={"/image/assets/counter.png"}
-                    className={styles.counter}
-                    alt="counter"
-                />
-
-                <img
                     src={gameState.customer}
                     className={styles.customer}
                     alt="customer"
                 />
-
                 <div className={styles.device_row}>
                     {gameState.devices_array.map((device, i) => (
                     <div
@@ -125,6 +118,14 @@ export default function Home() {
                 </div>
             </>
         )}
+        <img
+            src={"/image/assets/counter.png"}
+            className={styles.counter}
+            alt="counter"
+        />
+        <img
+            className={styles.customer_slot}
+        />
     </div>
   );
 }
