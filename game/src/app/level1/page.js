@@ -4,26 +4,17 @@ import styles from "../page.module.css";
 import { display, display_text } from "../Dialogue";
 
 export default function Home() {
-
     /*Handle items being dropped in the designed area*/
     const handleDrop = (e) => {
         e.preventDefault();
         const device = e.dataTransfer.getData("text/plain");
     };
 
-    const RandomDialogue = () => {
-        /* Devices array */
-        let devices_array = [null, null, null];
-   
-        /* Store random decisions */
+    /* Randomly decide a customer and their voice */
+    const getRandomCustomer = (dialogue_selection) => {
+        /* Store selected customer and their audio track */
         let customer;
         let audio_track;
-        let dialogue_selection;
-        let correct_device_pos;
-        let incorrect_device;
-
-        /* Decide the next dialogue */
-        dialogue_selection = display.level1.dialogue[Math.floor(Math.random() * display.level1.dialogue.length)];
 
         /* Decide the sex of the next customer */
         const random_customer_sex = Math.floor(Math.random() * 2);
@@ -37,8 +28,18 @@ export default function Home() {
             audio_track = dialogue_selection.audio_female[Math.floor(Math.random() * dialogue_selection.audio_female.length)];
         }
 
-        /* Decide the position of the correct device in the devices array */
-        correct_device_pos = Math.floor(Math.random() * devices_array.length);
+        return {customer, audio_track};
+    }
+
+    /* Randomly decide the devices to be shown on screen, assuring there is always a correct one */
+    const getRandomDevices = (dialogue_selection) => {
+        /* Devices array */
+        let devices_array = [null, null, null];
+
+        /* Store correct device position in the devices array and incorrect devices */
+        const correct_device_pos = Math.floor(Math.random() * devices_array.length);
+        let incorrect_device;
+
         devices_array[correct_device_pos] = dialogue_selection.image;
 
         /* Fill the device array with random devices, but assure there is always a correct one */
@@ -53,7 +54,21 @@ export default function Home() {
             }
         }
 
-        return {customer, audio_track, dialogue_selection, devices_array};
+        return {devices_array, correct_device_pos};
+    }
+
+    /* Build the random components that will appear on the game */
+    const RandomDialogue = () => {
+        /* Store selected dialogue */
+        const dialogue_selection = display.level1.dialogue[Math.floor(Math.random() * display.level1.dialogue.length)];
+
+        /* Store random selected customer and their voice */
+        const random_customer = getRandomCustomer(dialogue_selection);
+
+        /* Store random selected devices */
+        const random_devices = getRandomDevices(dialogue_selection);
+
+        return {dialogue_selection, random_customer, random_devices};
     };
   return (
     <div className={`${styles.page} ${styles.page_main_menu}`} style={{ backgroundImage: "url('/image/assets/store_bg.jpg')"}}>
