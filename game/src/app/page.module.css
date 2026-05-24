@@ -148,20 +148,24 @@
 
 .device_row {
   position: absolute;
-
   bottom: 12vh;
 
   display: flex;
   gap: 16vw;
+
+  align-items: flex-end;
+  justify-content: center;
 
   z-index: 9;
 }
 
 .device {
   width: 10vw;
+  height: 10vw;
+  object-fit: contain;
+  display: block;
 
   cursor: grab;
-
   transition: transform 0.2s ease;
 }
 
