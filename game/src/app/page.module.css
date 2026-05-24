@@ -145,3 +145,41 @@
 
   z-index: 5;
 }
+
+.device_row {
+  position: absolute;
+
+  bottom: 12vh;
+
+  display: flex;
+  gap: 16vw;
+
+  z-index: 9;
+}
+
+.device {
+  width: 10vw;
+
+  cursor: grab;
+
+  transition: transform 0.2s ease;
+}
+
+.device:hover {
+  transform: scale(1.1);
+}
+
+.customer_slot {
+  position: absolute;
+  bottom: 40vh;
+
+  background-color: rgba(255,0,0,0.3);
+
+  width: 15vw;
+  height: 15vw;
+
+  border: 4px dashed white;
+
+  border-radius: 20px;
+  z-index: 10;
+}
