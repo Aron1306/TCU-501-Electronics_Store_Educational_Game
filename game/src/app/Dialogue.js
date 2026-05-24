@@ -80,7 +80,7 @@ export const display = {
         {
           text: "I want a computer I can take outside.",
           answer: "laptop",
-          image: "latop.png",
+          image: "laptop.png",
           audio_female: ["level1_text9_female1.mp3", "level1_text9_female2.mp3"],
           audio_male: ["level1_text9_male1.mp3"]
         },
