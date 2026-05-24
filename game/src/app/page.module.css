@@ -1,5 +1,4 @@
 .page {
-  background-image: url("/jpg/main_menu_bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -10,8 +9,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  
   position: relative;
+}
+
+.page_main_menu {
+  justify-content: center;
 }
 
 .title {

@@ -32,7 +32,7 @@ export default function Home() {
     };
   }, []);
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} ${styles.page_main_menu}`} style={{ backgroundImage: "url('/image/assets/main_menu_bg.jpg')"}}>
       <audio ref={audioRef} loop>
         <source src="/audio/767856__sunixmuz__sunixmuz-bizarre-place-free-ccby.mp3" type="audio/mpeg" />
       </audio>
