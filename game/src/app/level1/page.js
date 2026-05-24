@@ -3,10 +3,12 @@ import { useEffect, useRef } from "react";
 import styles from "../page.module.css";
 
 export default function Home() {
+    
+    /*Handle items being dropped in the designed area*/
     const handleDrop = (e) => {
         e.preventDefault();
         const device = e.dataTransfer.getData("text/plain");
-  };
+    };
   return (
     <div className={`${styles.page} ${styles.page_main_menu}`} style={{ backgroundImage: "url('/image/assets/store_bg.jpg')"}}>
         <img

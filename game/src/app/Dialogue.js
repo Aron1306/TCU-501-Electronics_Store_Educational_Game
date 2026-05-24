@@ -34,7 +34,7 @@ export const display_text = {
         },
         {
           text: "I need something to do my homework.",
-          answer: "computer",
+          answer: "laptop",
           audio_female: ["level1_text3_female1.mp3", "level1_text3_female2.mp3"],
           audio_male: ["level1_text3_male1.mp3"]
         },
