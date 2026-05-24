@@ -21,7 +21,7 @@ export default function Home() {
 
         const data = e.dataTransfer.getData("deviceIndex");
 
-        if (data === "") return; // <- ignora drops externos
+        if (data === "") return; // ignore extern drops
 
         const index = Number(data);
 
