@@ -1,8 +1,11 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const router = useRouter();
+
   /*For click sounds*/
   const clickSoundRef = useRef(null);
   useEffect(() => {
@@ -41,7 +44,7 @@ export default function Home() {
         <span className={styles.title_bottom}>Electronics Store</span>
       </h1>
       <div className={styles.level_button_array}>
-        <button className={`${styles.button} ${styles.button_level}`} onClick={playClick}>
+        <button className={`${styles.button} ${styles.button_level}`} onClick={() => {playClick(); router.push("/level1");}}>
           <div className={styles.dot} style={{ gridArea: "2 / 2" }}></div>
         </button>
         <button className={`${styles.button} ${styles.button_level}`} onClick={playClick}>
