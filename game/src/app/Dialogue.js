@@ -279,7 +279,9 @@ export const display = {
   },
   all_levels: {
     customer_prefix: "/image/customers/",
+    device_prefix: "/image/devices/",
     male_customers: ["man1.png", "man2.png", "man3.png"],
-    female_customers: ["woman1.png", "woman2.png", "woman3.png"]
+    female_customers: ["woman1.png", "woman2.png", "woman3.png"],
+    devices: ["phone.png", "camera.png", "console.png", "headphones.png", "keyboard.png", "laptop.png", "microphone.png", "tablet.png", "television.png"]
   }
 }
