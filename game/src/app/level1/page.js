@@ -1,9 +1,20 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import styles from "../page.module.css";
 import { display, display_text } from "../Dialogue";
 
 export default function Home() {
+
+    const [gameState, setGameState] = useState(null);
+
+    useEffect(() => {
+        setGameState(RandomComponents());
+    }, []);
+
+    const regenerate = () => {
+        setGameState(RandomComponents());
+    };
+
     /*Handle items being dropped in the designed area*/
     const handleDrop = (e) => {
         e.preventDefault();
@@ -28,6 +39,10 @@ export default function Home() {
             audio_track = dialogue_selection.audio_female[Math.floor(Math.random() * dialogue_selection.audio_female.length)];
         }
 
+        /* Add path to the selected customer image and audio track */
+        customer = display.all_levels.customer_prefix + customer;
+        audio_track = display.level1.audio_prefix + audio_track;
+
         return {customer, audio_track};
     }
 
@@ -40,7 +55,7 @@ export default function Home() {
         const correct_device_pos = Math.floor(Math.random() * devices_array.length);
         let incorrect_device;
 
-        devices_array[correct_device_pos] = dialogue_selection.image;
+        devices_array[correct_device_pos] = display.all_levels.device_prefix + dialogue_selection.image;
 
         /* Fill the device array with random devices, but assure there is always a correct one */
         for (let pos = 0; pos < devices_array.length; pos++){
@@ -48,9 +63,9 @@ export default function Home() {
                 /* Avoid inserting the same image twice*/
                 do {
                     incorrect_device = display.all_levels.devices[Math.floor(Math.random() * display.all_levels.devices.length)];
-                } while (devices_array.includes(incorrect_device));
+                } while (devices_array.includes(display.all_levels.device_prefix + incorrect_device));
 
-                devices_array[pos] = incorrect_device;
+                devices_array[pos] = display.all_levels.device_prefix + incorrect_device;
             }
         }
 
@@ -68,46 +83,48 @@ export default function Home() {
         /* Store random selected devices */
         const random_devices = getRandomDevices(dialogue_selection);
 
-        return {dialogue_selection, random_customer, random_devices};
+        return {
+            dialogue_selection,
+            customer: random_customer.customer,
+            audio_track: random_customer.audio_track,
+            devices_array: random_devices.devices_array,
+            correct_device_pos: random_devices.correct_device_pos
+        };
     };
   return (
     <div className={`${styles.page} ${styles.page_main_menu}`} style={{ backgroundImage: "url('/image/assets/store_bg.jpg')"}}>
-        <img
-            src="/image/customers/woman1.png"
-            className={styles.customer}
-            alt="customer"
-        />
-        <img
-            src="/image/assets/counter.png"
-            className={styles.counter}
-            alt="Store Counter"
-        />
-        <div className={styles.customer_slot} onDrop={handleDrop} onDragOver={(e) => {e.preventDefault()}}> </div>
-        <div className={styles.device_row}>
-            <div draggable onDragStart={(e) => e.dataTransfer.setData("text/plain", "phone")}>
+        {gameState && (
+            <>
                 <img
-                src="/image/devices/phone.png"
-                className={styles.device}
+                    src={"/image/assets/counter.png"}
+                    className={styles.counter}
+                    alt="counter"
                 />
 
-            </div>
-
-            <div draggable onDragStart={(e) => e.dataTransfer.setData("text/plain", "laptop")}>
                 <img
-                src="/image/devices/laptop.png"
-                className={styles.device}
+                    src={gameState.customer}
+                    className={styles.customer}
+                    alt="customer"
                 />
 
-            </div>
-
-            <div draggable onDragStart={(e) => e.dataTransfer.setData("text/plain", "television")}>
-                <img
-                src="/image/devices/television.png"
-                className={styles.device}
-                />
-
-            </div>
-        </div>
+                <div className={styles.device_row}>
+                    {gameState.devices_array.map((device, i) => (
+                    <div
+                        key={i}
+                        draggable
+                        onDragStart={(e) =>
+                        e.dataTransfer.setData("text/plain", device)
+                        }
+                    >
+                        <img
+                        src={device}
+                        className={styles.device}
+                        />
+                    </div>
+                    ))}
+                </div>
+            </>
+        )}
     </div>
   );
 }
