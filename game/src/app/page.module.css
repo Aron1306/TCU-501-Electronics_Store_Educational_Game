@@ -126,3 +126,22 @@
   color: #37A3A5;
 }
 
+.customer {
+  position: absolute;
+
+  bottom: -15vh;
+
+  width: 15vw;
+
+  z-index: 2;
+}
+
+.counter {
+  position: absolute;
+
+  bottom: -15vh;
+
+  width: 120vw;
+
+  z-index: 5;
+}
