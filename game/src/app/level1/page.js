@@ -58,7 +58,7 @@ export default function Home() {
     }
 
     /* Build the random components that will appear on the game */
-    const RandomDialogue = () => {
+    const RandomComponents = () => {
         /* Store selected dialogue */
         const dialogue_selection = display.level1.dialogue[Math.floor(Math.random() * display.level1.dialogue.length)];
 
