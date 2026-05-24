@@ -1,4 +1,4 @@
-export const display_text = {
+export const display = {
   level1: {
       audio_prefix: "/audio/dialogue/level1/",
       device_prefix: "/image/device/",
@@ -276,5 +276,10 @@ export const display_text = {
         ],
       }
     ]
+  },
+  all_levels: {
+    customer_prefix: "/image/customers/",
+    male_customers: ["man1.png", "man2.png", "man3.png"],
+    female_customers: ["woman1.png", "woman2.png", "woman3.png"]
   }
 }
