@@ -1,6 +1,7 @@
 export const display_text = {
   level1: {
       audio_prefix: "/audio/dialogue/level1/",
+      device_prefix: "/image/device/",
       instructions: {
         english: [
             "You will work as a clerk in an Electronics Store.",
@@ -23,60 +24,70 @@ export const display_text = {
         {
           text: "I need something to call my parents.",
           answer: "phone",
+          image: "phone.png",
           audio_female: ["level1_text1_female1.mp3", "level1_text1_female2.mp3"],
           audio_male: ["level1_text1_male1.mp3"]
         },
         {
           text: "I want a big screen to watch movies.",
           answer: "television",
+          image: "television.png",
           audio_female: ["level1_text2_female1.mp3", "level1_text2_female2.mp3"],
           audio_male: ["level1_text2_male1.mp3"]
         },
         {
           text: "I need something to do my homework.",
           answer: "laptop",
+          image: "laptop.png",
           audio_female: ["level1_text3_female1.mp3", "level1_text3_female2.mp3"],
           audio_male: ["level1_text3_male1.mp3"]
         },
         {
           text: "I want to listen to music.",
           answer: "headphones",
+          image: "headphones.png",
           audio_female: ["level1_text4_female1.mp3", "level1_text4_female2.mp3"],
           audio_male: ["level1_text4_male1.mp3"]
         },
         {
           text: "I need a small device to take photos.",
           answer: "camera",
+          image: "camera.png",
           audio_female: ["level1_text5_female1.mp3", "level1_text5_female2.mp3"],
           audio_male: ["level1_text5_male1.mp3"]
         },
         {
           text: "I want to play video games at home.",
           answer: "console",
+          image: "console.png",
           audio_female: ["level1_text6_female1.mp3", "level1_text6_female2.mp3"],
           audio_male: ["level1_text6_male1.mp3"]
         },
         {
           text: "I need a big screen to read books.",
           answer: "tablet",
+          image: "tablet.png",
           audio_female: ["level1_text7_female1.mp3", "level1_text7_female2.mp3"],
           audio_male: ["level1_text7_male1.mp3"]
         },
         {
           text: "I need something to write on my computer.",
           answer: "keyboard",
+          image: "keyboard.png",
           audio_female: ["level1_text8_female1.mp3", "level1_text8_female2.mp3"],
           audio_male: ["level1_text8_male1.mp3"]
         },
         {
           text: "I want a computer I can take outside.",
           answer: "laptop",
+          image: "latop.png",
           audio_female: ["level1_text9_female1.mp3", "level1_text9_female2.mp3"],
           audio_male: ["level1_text9_male1.mp3"]
         },
         {
           text: "I need my friends to hear me online.",
           answer: "microphone",
+          image: "microphone.png",
           audio_female: ["level1_text10_female1.mp3", "level1_text10_female2.mp3"],
           audio_male: ["level1_text10_male1.mp3"]
         },
@@ -192,6 +203,8 @@ export const display_text = {
       ]
   },
   level4: {
+    audio_prefix: "/audio/dialogue/level4/",
+    device_prefix: "/image/device/",
     instructions: {
       english: [
         "You will work as a clerk in an Electronics Store.",
@@ -217,6 +230,7 @@ export const display_text = {
     dialogue: [
       {
         device: "phone",
+        image: "phone.png",
         options: [
           "You can call people",
           "You can send messages"
@@ -225,6 +239,7 @@ export const display_text = {
       },
       {
         device: "laptop",
+        image: "laptop.png",
         options: [
           "You can do homework",
           "You can use the internet"
@@ -233,6 +248,7 @@ export const display_text = {
       },
       {
         device: "console",
+        image: "console.png",
         options: [
           "You can play video games",
           "You can play with friends"
@@ -241,6 +257,7 @@ export const display_text = {
       },
       {
         device: "headphones",
+        image: "headphones.png",
         options: [
           "You can listen to music"
         ],
@@ -248,6 +265,7 @@ export const display_text = {
       },
       {
         device: "tablet",
+        image: "tablet.png",
         options: [
           "You can read books",
           "You can watch videos",
