@@ -7,6 +7,7 @@ export default function Home() {
 
     const [gameState, setGameState] = useState(null);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [score, setScore] = useState(0);
 
     const dialogueAudioRef = useRef(null);
 
@@ -22,6 +23,7 @@ export default function Home() {
         playDialogue(gameState.audio_track);
     }, [gameState]);
 
+    /* Auxiliary function to play the audio track of the customer request */
     const playDialogue = (path) => {
         if (dialogueAudioRef.current) {
             dialogueAudioRef.current.pause();
@@ -32,6 +34,7 @@ export default function Home() {
         audio.play().catch(() => {});
     };
 
+    /* Auxiliary function to play the audio track of the customer feedback */
     const playFeedbackAudio = (path) => {
         const audio = new Audio(path);
         feedbackAudioRef.current = audio;
@@ -54,7 +57,14 @@ export default function Home() {
         setIsTransitioning(true);
 
         const index = Number(data);
-        playFeedback(index);
+        const isCorrect =
+            index === gameState.correct_device_pos;
+
+        if (isCorrect) {
+            setScore(prev => prev + 100);
+        }
+
+        playFeedback(isCorrect);
 
         setTimeout(() => {
             regenerate();
@@ -63,10 +73,7 @@ export default function Home() {
     };
 
     /* Play feedback after each selection of the player */
-    const playFeedback = (index) => {
-        const isCorrect =
-            index === gameState.correct_device_pos;
-
+    const playFeedback = (isCorrect) => {
         const feedbackArray = isCorrect
             ? display.all_levels[`${gameState.customer_sex}_correct`]
             : display.all_levels[`${gameState.customer_sex}_incorrect`];
@@ -151,6 +158,9 @@ export default function Home() {
     };
   return (
     <div className={`${styles.page} ${styles.page_main_menu}`} style={{ backgroundImage: "url('/image/assets/store_bg.jpg')"}}>
+        <div className={styles.score}>
+            Score: {score}
+        </div>
         {gameState && (
             <>
                 <img
