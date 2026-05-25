@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 export default function Home() {
 
     const router = useRouter();
+    const [timeLeft, setTimeLeft] = useState(60);
     const [gameState, setGameState] = useState(null);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [score, setScore] = useState(0);
@@ -17,6 +18,28 @@ export default function Home() {
 
     useEffect(() => {
         setGameState(RandomComponents());
+    }, []);
+
+    /* When time reaches 0, go back to the main menu (TODO: Do something else when time runs out) */
+    useEffect(() => {
+        if (timeLeft === 0) {
+            router.push("/");
+        }
+
+    }, [timeLeft]);
+
+    /* 60 second countdown */
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTimeLeft((prev) => {
+                if (prev <= 1) {
+                    clearInterval(timer);
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+        return () => clearInterval(timer);
     }, []);
 
     /* Play the audio track of the next customer */
@@ -163,7 +186,9 @@ export default function Home() {
         <div className={styles.score}>
             Score: {score}
         </div>
-
+        <div className={styles.timer}>
+            {timeLeft}
+        </div>
         <button className={`${styles.button} ${styles.button_back}`} onClick={() => router.push("/")}> Menu </button>
         {gameState && (
             <>
