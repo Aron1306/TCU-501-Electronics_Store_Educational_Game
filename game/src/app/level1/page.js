@@ -2,9 +2,11 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "../page.module.css";
 import { display } from "../Dialogue";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
 
+    const router = useRouter();
     const [gameState, setGameState] = useState(null);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [score, setScore] = useState(0);
@@ -161,6 +163,8 @@ export default function Home() {
         <div className={styles.score}>
             Score: {score}
         </div>
+
+        <button className={`${styles.button} ${styles.button_back}`} onClick={() => router.push("/")}> Menu </button>
         {gameState && (
             <>
                 <img
