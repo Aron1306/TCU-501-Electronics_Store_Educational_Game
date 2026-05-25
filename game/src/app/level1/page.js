@@ -1,13 +1,16 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import styles from "../page.module.css";
-import { display, display_text } from "../Dialogue";
+import { display } from "../Dialogue";
 
 export default function Home() {
 
     const [gameState, setGameState] = useState(null);
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
-    const audioRef = useRef(null);
+    const dialogueAudioRef = useRef(null);
+
+    const feedbackAudioRef = useRef(null);
 
     useEffect(() => {
         setGameState(RandomComponents());
@@ -16,16 +19,23 @@ export default function Home() {
     /* Play the audio track of the next customer */
     useEffect(() => {
         if (!gameState) return;
-        playAudio(gameState.audio_track);
+        playDialogue(gameState.audio_track);
     }, [gameState]);
 
-    const playAudio = (path) => {
-        if (audioRef.current) {
-            audioRef.current.pause();
+    const playDialogue = (path) => {
+        if (dialogueAudioRef.current) {
+            dialogueAudioRef.current.pause();
         }
+
         const audio = new Audio(path);
-        audioRef.current = audio;
-        audio.play();
+        dialogueAudioRef.current = audio;
+        audio.play().catch(() => {});
+    };
+
+    const playFeedbackAudio = (path) => {
+        const audio = new Audio(path);
+        feedbackAudioRef.current = audio;
+        audio.play().catch(() => {});
     };
 
     /* Next customer */
@@ -36,17 +46,19 @@ export default function Home() {
     /*Handle items being dropped in the designed area*/
     const handleDrop = (e) => {
         e.preventDefault();
-
+        if (isTransitioning) return;
+        
         const data = e.dataTransfer.getData("deviceIndex");
-
         if (data === "") return; // ignore extern drops
 
-        const index = Number(data);
+        setIsTransitioning(true);
 
+        const index = Number(data);
         playFeedback(index);
 
         setTimeout(() => {
             regenerate();
+            setIsTransitioning(false);
         }, 2000);
     };
 
@@ -59,7 +71,7 @@ export default function Home() {
             ? display.all_levels[`${gameState.customer_sex}_correct`]
             : display.all_levels[`${gameState.customer_sex}_incorrect`];
 
-        playAudio(`${display.all_levels.feedback_prefix}${feedbackArray[Math.floor(Math.random() * feedbackArray.length)]}`);
+        playFeedbackAudio(`${display.all_levels.feedback_prefix}${feedbackArray[Math.floor(Math.random() * feedbackArray.length)]}`);
     };
 
     /* Randomly decide a customer and their voice */
