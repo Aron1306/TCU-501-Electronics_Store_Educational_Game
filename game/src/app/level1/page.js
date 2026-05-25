@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "../page.module.css";
 import { display, display_text } from "../Dialogue";
 
@@ -7,10 +7,28 @@ export default function Home() {
 
     const [gameState, setGameState] = useState(null);
 
+    const audioRef = useRef(null);
+
     useEffect(() => {
         setGameState(RandomComponents());
     }, []);
 
+    /* Play the audio track of the next customer */
+    useEffect(() => {
+        if (!gameState) return;
+        playAudio(gameState.audio_track);
+    }, [gameState]);
+
+    const playAudio = (path) => {
+        if (audioRef.current) {
+            audioRef.current.pause();
+        }
+        const audio = new Audio(path);
+        audioRef.current = audio;
+        audio.play();
+    };
+
+    /* Next customer */
     const regenerate = () => {
         setGameState(RandomComponents());
     };
@@ -26,9 +44,7 @@ export default function Home() {
         const index = Number(data);
 
         if (index === gameState.correct_device_pos) {
-            console.log("correcto");
         } else {
-            console.log("incorrecto");
         }
 
         regenerate();
