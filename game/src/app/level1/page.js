@@ -43,11 +43,23 @@ export default function Home() {
 
         const index = Number(data);
 
-        if (index === gameState.correct_device_pos) {
-        } else {
-        }
+        playFeedback(index);
 
-        regenerate();
+        setTimeout(() => {
+            regenerate();
+        }, 2000);
+    };
+
+    /* Play feedback after each selection of the player */
+    const playFeedback = (index) => {
+        const isCorrect =
+            index === gameState.correct_device_pos;
+
+        const feedbackArray = isCorrect
+            ? display.all_levels[`${gameState.customer_sex}_correct`]
+            : display.all_levels[`${gameState.customer_sex}_incorrect`];
+
+        playAudio(`${display.all_levels.feedback_prefix}${feedbackArray[Math.floor(Math.random() * feedbackArray.length)]}`);
     };
 
     /* Randomly decide a customer and their voice */
@@ -55,6 +67,7 @@ export default function Home() {
         /* Store selected customer and their audio track */
         let customer;
         let audio_track;
+        let customer_sex;
 
         /* Decide the sex of the next customer */
         const random_customer_sex = Math.floor(Math.random() * 2);
@@ -63,16 +76,19 @@ export default function Home() {
         if (random_customer_sex === 0){
             customer = display.all_levels.male_customers[Math.floor(Math.random() * display.all_levels.male_customers.length)];
             audio_track = dialogue_selection.audio_male[Math.floor(Math.random() * dialogue_selection.audio_male.length)];
+            customer_sex = "male";
         } else {
             customer = display.all_levels.female_customers[Math.floor(Math.random() * display.all_levels.female_customers.length)];
             audio_track = dialogue_selection.audio_female[Math.floor(Math.random() * dialogue_selection.audio_female.length)];
+
+            customer.includes("female1") ? customer_sex =  "female1" : customer_sex = "female2";
         }
 
         /* Add path to the selected customer image and audio track */
         customer = display.all_levels.customer_prefix + customer;
         audio_track = display.level1.audio_prefix + audio_track;
 
-        return {customer, audio_track};
+        return {customer, audio_track, customer_sex};
     }
 
     /* Randomly decide the devices to be shown on screen, assuring there is always a correct one */
@@ -88,7 +104,7 @@ export default function Home() {
 
         /* Fill the device array with random devices, but assure there is always a correct one */
         for (let pos = 0; pos < devices_array.length; pos++){
-            if (pos != correct_device_pos){
+            if (pos !== correct_device_pos){
                 /* Avoid inserting the same image twice*/
                 do {
                     incorrect_device = display.all_levels.devices[Math.floor(Math.random() * display.all_levels.devices.length)];
@@ -116,8 +132,9 @@ export default function Home() {
             dialogue_selection,
             customer: random_customer.customer,
             audio_track: random_customer.audio_track,
+            customer_sex: random_customer.customer_sex,
             devices_array: random_devices.devices_array,
-            correct_device_pos: random_devices.correct_device_pos
+            correct_device_pos: random_devices.correct_device_pos,
         };
     };
   return (
