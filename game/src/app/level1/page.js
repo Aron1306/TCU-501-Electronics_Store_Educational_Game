@@ -5,7 +5,7 @@ import { display } from "../Dialogue";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-
+    const [showModal, setShowModal] = useState(false);
     const router = useRouter();
     const [timeLeft, setTimeLeft] = useState(60);
     const [gameState, setGameState] = useState(null);
@@ -23,7 +23,7 @@ export default function Home() {
     /* When time reaches 0, go back to the main menu (TODO: Do something else when time runs out) */
     useEffect(() => {
         if (timeLeft === 0) {
-            router.push("/");
+            setShowModal(true);
         }
 
     }, [timeLeft]);
@@ -226,6 +226,21 @@ export default function Home() {
             onDragOver={(e) => e.preventDefault()}
             onDrop={handleDrop}
         />
+        {showModal && (
+            <div className={styles.modal_overlay}>
+                <div className={styles.modal}>
+                    <h2> Your Score: {score} </h2>
+                    <button
+                        className={styles.start_button}
+                        onClick={() => {
+                            router.push("/");
+                        }}
+                    >
+                        OK
+                    </button>
+                </div>
+            </div>
+        )}
     </div>
   );
 }
