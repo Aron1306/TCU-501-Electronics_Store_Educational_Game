@@ -1,9 +1,13 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { display } from "./Dialogue";
 import styles from "./page.module.css";
 
 export default function Home() {
+
+  const [showModal, setShowModal] = useState(false);
+
   const router = useRouter();
 
   /*For click sounds*/
@@ -44,7 +48,7 @@ export default function Home() {
         <span className={styles.title_bottom}>Electronics Store</span>
       </h1>
       <div className={styles.level_button_array}>
-        <button className={`${styles.button} ${styles.button_level}`} onClick={() => {playClick(); router.push("/level1");}}>
+        <button className={`${styles.button} ${styles.button_level}`} onClick={() => {playClick();setShowModal(true)}}>
           <div className={styles.dot} style={{ gridArea: "2 / 2" }}></div>
         </button>
         <button className={`${styles.button} ${styles.button_level}`} onClick={playClick}>
@@ -69,6 +73,36 @@ export default function Home() {
       <button className={`${styles.button} ${styles.button_mute}`} onClick={() => {audioRef.current.muted = !audioRef.current.muted}}>
       🔇
       </button>
+      {showModal && (
+        <div className={styles.modal_overlay}>
+            <div className={styles.modal}>
+                <button
+                    className={styles.close_button}
+                    onClick={() => {
+                        playClick();
+                        setShowModal(false);
+                    }}
+                >
+                    ✕
+                </button>
+                <h2>Level 1 Rules</h2>
+                {display.level1.instructions.map((instruction, i) => (
+                    <p key={i}>
+                        {instruction}
+                    </p>
+                ))}
+                <button
+                    className={styles.start_button}
+                    onClick={() => {
+                        playClick();
+                        router.push("/level1");
+                    }}
+                >
+                    Start
+                </button>
+            </div>
+        </div>
+    )}
     </div>
   );
 }
