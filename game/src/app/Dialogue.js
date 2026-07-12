@@ -241,11 +241,11 @@ export const display = {
     female_customers: ["woman1.png", "woman2.png", "woman3.png"],
     devices: ["phone.png", "camera.png", "console.png", "headphones.png", "keyboard.png", "laptop.png", "microphone.png", "tablet.png", "television.png"],
     male_correct: ["correct_male1_variant1.mp3", "correct_male1_variant2.mp3"],
-    male_incorrect: ["incorrect_male1_variant1.mp3", "incorrect_male1_variant2.mp3"],
+    male_incorrect: ["incorrect_male1_variant1.mp3"],
     female1_correct: ["correct_female1_variant1.mp3", "correct_female1_variant2.mp3"],
-    female1_incorrect: ["incorrect_female1_variant1.mp3", "incorrect_female1_variant2.mp3"],
+    female1_incorrect: ["incorrect_female1_variant1.mp3"],
     female2_correct: ["correct_female2_variant1.mp3", "correct_female2_variant2.mp3"],
-    female2_incorrect: ["incorrect_female2_variant1.mp3", "incorrect_female2_variant2.mp3"],
+    female2_incorrect: ["incorrect_female2_variant1.mp3"],
     
   }
 }
