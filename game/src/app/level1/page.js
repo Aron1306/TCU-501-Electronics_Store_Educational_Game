@@ -11,6 +11,7 @@ export default function Home() {
     const [gameState, setGameState] = useState(null);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [score, setScore] = useState(0);
+    const [lastDropCorrect, setLastDropCorrect] = useState(null);
 
     const dialogueAudioRef = useRef(null);
 
@@ -85,8 +86,11 @@ export default function Home() {
         const isCorrect =
             index === gameState.correct_device_pos;
 
+        setLastDropCorrect(isCorrect);
+
         if (isCorrect) {
             setScore(prev => prev + 100);
+            
         }
 
         playFeedback(isCorrect);
@@ -226,6 +230,13 @@ export default function Home() {
             onDragOver={(e) => e.preventDefault()}
             onDrop={handleDrop}
         />
+        {isTransitioning && (
+            <img
+                src={lastDropCorrect ? "/image/assets/correct.png" : "/image/assets/incorrect.png"}
+                className={styles.feedback_icon}
+                alt="feedback"
+            />
+        )}
         {showModal && (
             <div className={styles.modal_overlay}>
                 <div className={styles.modal}>

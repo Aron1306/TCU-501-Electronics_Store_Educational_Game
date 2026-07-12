@@ -306,3 +306,16 @@
 .start_button:hover {
   transform: scale(1.07);
 }
+
+.feedback_icon {
+  position: absolute;
+  bottom: 40vh;
+
+  width: 15vw;
+  height: 15vw;
+  object-fit: contain;
+
+  z-index: 11;
+
+  pointer-events: none;
+}
