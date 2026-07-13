@@ -165,6 +165,12 @@ export default function Home() {
         return {devices_array, correct_device_pos};
     }
 
+    /* Repeat the audio of the current customer */
+    const repeatDialogue = () => {
+        if (!gameState) return;
+        playDialogue(gameState.audio_track);
+    };
+
     /* Build the random components that will appear on the game */
     const RandomComponents = () => {
         /* Store selected dialogue */
@@ -193,6 +199,7 @@ export default function Home() {
         <div className={styles.timer}>
             {timeLeft}
         </div>
+        <button className={styles.button_repeat} onClick={repeatDialogue} aria-label="Repetir audio"> 🔊 </button>
         <button className={`${styles.button} ${styles.button_back}`} onClick={() => router.push("/")}> Menu </button>
         {gameState && (
             <>

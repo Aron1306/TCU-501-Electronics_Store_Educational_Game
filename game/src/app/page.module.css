@@ -319,3 +319,31 @@
 
   pointer-events: none;
 }
+
+.button_repeat {
+  position: absolute;
+  bottom: 42vh;
+  left: calc(50% + 10vw);
+
+  width: clamp(50px, 6vw, 90px);
+  height: clamp(50px, 6vw, 90px);
+
+  border: none;
+  border-radius: 100px;
+  background-color: #fffdd0;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+
+  font-size: clamp(20px, 3vw, 35px);
+  cursor: pointer;
+
+  z-index: 11;
+  transition: transform 0.2s ease;
+}
+
+.button_repeat:hover {
+  transform: scale(1.1);
+}
+
+.button_repeat:active {
+  transform: scale(0.95);
+}
