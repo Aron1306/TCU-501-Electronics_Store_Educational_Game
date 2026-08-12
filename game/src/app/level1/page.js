@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import styles from "../page.module.css";
 import { display } from "../Dialogue";
 import { useRouter } from "next/navigation";
+import GameShell from "../components/gameshell"
 
 export default function Home() {
     const [showModal, setShowModal] = useState(false);
@@ -201,15 +202,8 @@ export default function Home() {
         };
     };
   return (
-    <div className={`${styles.page} ${styles.page_main_menu}`} style={{ backgroundImage: "url('/image/assets/store_bg.jpg')"}}>
-        <div className={styles.score}>
-            Score: {score}
-        </div>
-        <div className={styles.timer}>
-            {timeLeft}
-        </div>
+    <GameShell bgImage={display.all_levels.background_image} score={score} timeLeft={timeLeft} onMenuClick={() => router.push("/")} showModal={showModal}>
         <button className={styles.button_repeat} onClick={repeatDialogue} aria-label="Repetir audio"> 🔊 </button>
-        <button className={`${styles.button} ${styles.button_back}`} onClick={() => router.push("/")}> Menu </button>
         {gameState && (
             <>
                 <img
@@ -257,21 +251,6 @@ export default function Home() {
                 alt="feedback"
             />
         )}
-        {showModal && (
-            <div className={styles.modal_overlay}>
-                <div className={styles.modal}>
-                    <h2> Your Score: {score} </h2>
-                    <button
-                        className={styles.start_button}
-                        onClick={() => {
-                            router.push("/");
-                        }}
-                    >
-                        OK
-                    </button>
-                </div>
-            </div>
-        )}
-    </div>
+    </GameShell>
   );
 }
