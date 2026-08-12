@@ -347,3 +347,24 @@
 .button_repeat:active {
   transform: scale(0.95);
 }
+
+.logos {
+  position: absolute;
+  display: flex;
+  bottom: 20px;
+  left: 16px;
+  align-items: flex-end;
+  gap: 7px;
+}
+
+.logos_ucr {
+  height: clamp(40px, 8vw, 85px);
+  margin-bottom: 10px;
+  left: 16px;
+  width: auto;
+}
+
+.logos_tcu {
+  height: clamp(40px, 8vw, 128px);
+  width: auto;
+}

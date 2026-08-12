@@ -73,6 +73,10 @@ export default function Home() {
       <button className={`${styles.button} ${styles.button_mute}`} onClick={() => {audioRef.current.muted = !audioRef.current.muted}}>
       🔇
       </button>
+      <div className={styles.logos}>
+        <img src="/image/assets/ucr-logo.png" alt="UCR logo" className={styles.logos_ucr}/>
+        <img src="/image/assets/tcu-logo.png" alt="TCU logo" className={styles.logos_tcu}/>
+      </div>
       {showModal && (
         <div className={styles.modal_overlay}>
             <div className={styles.modal}>
