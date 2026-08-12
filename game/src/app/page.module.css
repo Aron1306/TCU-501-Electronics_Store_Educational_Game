@@ -306,3 +306,74 @@
 .start_button:hover {
   transform: scale(1.07);
 }
+
+.feedback_icon {
+  position: absolute;
+  bottom: 40vh;
+
+  width: 15vw;
+  height: 15vw;
+  object-fit: contain;
+
+  z-index: 11;
+
+  pointer-events: none;
+}
+
+.button_repeat {
+  position: absolute;
+  bottom: 42vh;
+  left: calc(50% + 10vw);
+
+  width: clamp(50px, 6vw, 90px);
+  height: clamp(50px, 6vw, 90px);
+
+  border: none;
+  border-radius: 100px;
+  background-color: #fffdd0;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+
+  font-size: clamp(20px, 3vw, 35px);
+  cursor: pointer;
+
+  z-index: 11;
+  transition: transform 0.2s ease;
+}
+
+.button_repeat:hover {
+  transform: scale(1.1);
+}
+
+.button_repeat:active {
+  transform: scale(0.95);
+}
+
+.logos {
+  position: absolute;
+  display: flex;
+  bottom: 20px;
+  left: 16px;
+  align-items: flex-end;
+  gap: 7px;
+}
+
+.logos_ucr {
+  height: clamp(40px, 8vw, 85px);
+  margin-bottom: 10px;
+  left: 16px;
+  width: auto;
+}
+
+.logos_tcu {
+  height: clamp(40px, 8vw, 128px);
+  width: auto;
+}
+
+.device_highlight {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(96, 218, 62, 0.4);
+  border: 3px solid #163f12;
+  border-radius: 12px;
+  pointer-events: none;
+}

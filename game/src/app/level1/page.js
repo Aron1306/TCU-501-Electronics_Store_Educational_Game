@@ -1,8 +1,9 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import styles from "../page.module.css";
-import { display } from "../Dialogue";
+import { display } from "../display";
 import { useRouter } from "next/navigation";
+import GameShell from "../components/gameshell"
 
 export default function Home() {
     const [showModal, setShowModal] = useState(false);
@@ -11,9 +12,10 @@ export default function Home() {
     const [gameState, setGameState] = useState(null);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [score, setScore] = useState(0);
+    const [lastDropCorrect, setLastDropCorrect] = useState(null);
 
     const dialogueAudioRef = useRef(null);
-
+    const endAudioRef = useRef(null);
     const feedbackAudioRef = useRef(null);
 
     useEffect(() => {
@@ -47,6 +49,15 @@ export default function Home() {
         if (!gameState) return;
         playDialogue(gameState.audio_track);
     }, [gameState]);
+
+    /* Play 'tada' audio when showing the score at the end of the game */
+    useEffect(() => {
+        if (showModal) {
+            const tadaAudio = new Audio("/audio/397355__plasterbrain__tada-fanfare-a.flac");
+            endAudioRef.current = tadaAudio;
+            tadaAudio.play().catch(() => {});
+        }
+    }, [showModal]);
 
     /* Auxiliary function to play the audio track of the customer request */
     const playDialogue = (path) => {
@@ -85,8 +96,11 @@ export default function Home() {
         const isCorrect =
             index === gameState.correct_device_pos;
 
+        setLastDropCorrect(isCorrect);
+
         if (isCorrect) {
             setScore(prev => prev + 100);
+            
         }
 
         playFeedback(isCorrect);
@@ -161,6 +175,12 @@ export default function Home() {
         return {devices_array, correct_device_pos};
     }
 
+    /* Repeat the audio of the current customer */
+    const repeatDialogue = () => {
+        if (!gameState) return;
+        playDialogue(gameState.audio_track);
+    };
+
     /* Build the random components that will appear on the game */
     const RandomComponents = () => {
         /* Store selected dialogue */
@@ -182,14 +202,8 @@ export default function Home() {
         };
     };
   return (
-    <div className={`${styles.page} ${styles.page_main_menu}`} style={{ backgroundImage: "url('/image/assets/store_bg.jpg')"}}>
-        <div className={styles.score}>
-            Score: {score}
-        </div>
-        <div className={styles.timer}>
-            {timeLeft}
-        </div>
-        <button className={`${styles.button} ${styles.button_back}`} onClick={() => router.push("/")}> Menu </button>
+    <GameShell bgImage={display.all_levels.background_image} score={score} timeLeft={timeLeft} onMenuClick={() => router.push("/")} showModal={showModal}>
+        <button className={styles.button_repeat} onClick={repeatDialogue} aria-label="Repetir audio"> 🔊 </button>
         {gameState && (
             <>
                 <img
@@ -205,11 +219,15 @@ export default function Home() {
                         onDragStart={(e) =>
                             e.dataTransfer.setData("deviceIndex", i)
                         }
+                        style={{ position: "relative" }}
                     >
                         <img
                         src={device}
                         className={styles.device}
                         />
+                        {isTransitioning && i === gameState.correct_device_pos && (
+                            <div className={styles.device_highlight} />
+                        )}
                     </div>
                     ))}
                 </div>
@@ -226,21 +244,13 @@ export default function Home() {
             onDragOver={(e) => e.preventDefault()}
             onDrop={handleDrop}
         />
-        {showModal && (
-            <div className={styles.modal_overlay}>
-                <div className={styles.modal}>
-                    <h2> Your Score: {score} </h2>
-                    <button
-                        className={styles.start_button}
-                        onClick={() => {
-                            router.push("/");
-                        }}
-                    >
-                        OK
-                    </button>
-                </div>
-            </div>
+        {isTransitioning && (
+            <img
+                src={lastDropCorrect ? "/image/assets/correct.png" : "/image/assets/incorrect.png"}
+                className={styles.feedback_icon}
+                alt="feedback"
+            />
         )}
-    </div>
+    </GameShell>
   );
 }
