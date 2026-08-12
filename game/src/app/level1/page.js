@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import styles from "../page.module.css";
-import { display } from "../Dialogue";
+import { display } from "../display";
 import { useRouter } from "next/navigation";
 import GameShell from "../components/gameshell"
 

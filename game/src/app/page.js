@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { display } from "./Dialogue";
+import { display } from "./display";
 import styles from "./page.module.css";
 
 export default function Home() {
