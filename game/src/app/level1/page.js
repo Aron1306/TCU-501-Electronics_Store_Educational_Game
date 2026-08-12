@@ -14,7 +14,7 @@ export default function Home() {
     const [lastDropCorrect, setLastDropCorrect] = useState(null);
 
     const dialogueAudioRef = useRef(null);
-
+    const endAudioRef = useRef(null);
     const feedbackAudioRef = useRef(null);
 
     useEffect(() => {
@@ -48,6 +48,15 @@ export default function Home() {
         if (!gameState) return;
         playDialogue(gameState.audio_track);
     }, [gameState]);
+
+    /* Play 'tada' audio when showing the score at the end of the game */
+    useEffect(() => {
+        if (showModal) {
+            const tadaAudio = new Audio("/audio/397355__plasterbrain__tada-fanfare-a.flac");
+            endAudioRef.current = tadaAudio;
+            tadaAudio.play().catch(() => {});
+        }
+    }, [showModal]);
 
     /* Auxiliary function to play the audio track of the customer request */
     const playDialogue = (path) => {
