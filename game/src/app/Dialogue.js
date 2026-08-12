@@ -234,6 +234,7 @@ export const display = {
     ]
   },
   all_levels: {
+    background_image: "/image/assets/store_bg.jpg",
     customer_prefix: "/image/customers/",
     device_prefix: "/image/devices/",
     feedback_prefix: "/audio/dialogue/all_levels/feedback/",
