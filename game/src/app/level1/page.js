@@ -216,11 +216,15 @@ export default function Home() {
                         onDragStart={(e) =>
                             e.dataTransfer.setData("deviceIndex", i)
                         }
+                        style={{ position: "relative" }}
                     >
                         <img
                         src={device}
                         className={styles.device}
                         />
+                        {isTransitioning && i === gameState.correct_device_pos && (
+                            <div className={styles.device_highlight} />
+                        )}
                     </div>
                     ))}
                 </div>
