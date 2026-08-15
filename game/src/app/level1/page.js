@@ -22,7 +22,7 @@ export default function Home() {
         setGameState(RandomComponents());
     }, []);
 
-    /* When time reaches 0, go back to the main menu (TODO: Do something else when time runs out) */
+    /* When time reaches 0, go back to the main menu */
     useEffect(() => {
         if (timeLeft === 0) {
             setShowModal(true);
