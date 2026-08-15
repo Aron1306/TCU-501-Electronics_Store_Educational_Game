@@ -6,42 +6,17 @@ import { useRouter } from "next/navigation";
 import GameShell from "../components/gameshell"
 
 export default function Home() {
-    const [showModal, setShowModal] = useState(false);
     const router = useRouter();
-    const [timeLeft, setTimeLeft] = useState(60);
     const [gameState, setGameState] = useState(null);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [score, setScore] = useState(0);
     const [lastDropCorrect, setLastDropCorrect] = useState(null);
 
     const dialogueAudioRef = useRef(null);
-    const endAudioRef = useRef(null);
     const feedbackAudioRef = useRef(null);
 
     useEffect(() => {
         setGameState(RandomComponents());
-    }, []);
-
-    /* When time reaches 0, go back to the main menu */
-    useEffect(() => {
-        if (timeLeft === 0) {
-            setShowModal(true);
-        }
-
-    }, [timeLeft]);
-
-    /* 60 second countdown */
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setTimeLeft((prev) => {
-                if (prev <= 1) {
-                    clearInterval(timer);
-                    return 0;
-                }
-                return prev - 1;
-            });
-        }, 1000);
-        return () => clearInterval(timer);
     }, []);
 
     /* Play the audio track of the next customer */
@@ -50,14 +25,6 @@ export default function Home() {
         playDialogue(gameState.audio_track);
     }, [gameState]);
 
-    /* Play 'tada' audio when showing the score at the end of the game */
-    useEffect(() => {
-        if (showModal) {
-            const tadaAudio = new Audio("/audio/397355__plasterbrain__tada-fanfare-a.flac");
-            endAudioRef.current = tadaAudio;
-            tadaAudio.play().catch(() => {});
-        }
-    }, [showModal]);
 
     /* Auxiliary function to play the audio track of the customer request */
     const playDialogue = (path) => {
@@ -202,15 +169,11 @@ export default function Home() {
         };
     };
   return (
-    <GameShell bgImage={display.all_levels.background_image} score={score} timeLeft={timeLeft} onMenuClick={() => router.push("/")} showModal={showModal}>
+    <GameShell bgImage={display.all_levels.background_image} score={score} onMenuClick={() => router.push("/")}>
         <button className={styles.button_repeat} onClick={repeatDialogue} aria-label="Repetir audio"> 🔊 </button>
         {gameState && (
             <>
-                <img
-                    src={gameState.customer}
-                    className={styles.customer}
-                    alt="customer"
-                />
+                <img src={gameState.customer} className={styles.customer} alt="customer"/>
                 <div className={styles.device_row}>
                     {gameState.devices_array.map((device, i) => (
                     <div
@@ -221,10 +184,7 @@ export default function Home() {
                         }
                         style={{ position: "relative" }}
                     >
-                        <img
-                        src={device}
-                        className={styles.device}
-                        />
+                        <img src={device} className={styles.device}/>
                         {isTransitioning && i === gameState.correct_device_pos && (
                             <div className={styles.device_highlight} />
                         )}
@@ -233,23 +193,14 @@ export default function Home() {
                 </div>
             </>
         )}
-        <img
-            src={"/image/assets/counter.png"}
-            className={styles.counter}
-            alt="counter"
-            draggable={false}
-        />
+        <img src={"/image/assets/counter.png"} className={styles.counter} alt="counter" draggable={false}/>
         <div
             className={styles.customer_slot}
             onDragOver={(e) => e.preventDefault()}
             onDrop={handleDrop}
         />
         {isTransitioning && (
-            <img
-                src={lastDropCorrect ? "/image/assets/correct.png" : "/image/assets/incorrect.png"}
-                className={styles.feedback_icon}
-                alt="feedback"
-            />
+            <img src={lastDropCorrect ? "/image/assets/correct.png" : "/image/assets/incorrect.png"} className={styles.feedback_icon} alt="feedback"/>
         )}
     </GameShell>
   );
