@@ -4,13 +4,14 @@ import styles from "../page.module.css";
 import { display } from "../display";
 import { useRouter } from "next/navigation";
 import GameShell from "../components/gameshell"
+import OptionsBubbles from "../components/optionsBubbles";
 
 export default function Home() {
     const router = useRouter();
     const [gameState, setGameState] = useState(null);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [score, setScore] = useState(0);
-    const [lastDropCorrect, setLastDropCorrect] = useState(null);
+    const [lastSelectCorrect, setLastSelectCorrect] = useState(null);
 
     const dialogueAudioRef = useRef(null);
     const feedbackAudioRef = useRef(null);
@@ -101,19 +102,70 @@ export default function Home() {
         /* Store random selected customer and their voice */
         const random_customer = getRandomCustomer(dialogue_selection);
 
+        const random_options = RandomOptions(dialogue_selection);
+
         return {
             dialogue_selection,
             customer: random_customer.customer,
             audio_track: random_customer.audio_track,
             customer_sex: random_customer.customer_sex,
+            optionsToShow: random_options.optionsToShow,
+            correctOption: dialogue_selection.answer,
         };
     };
+
+    /* Select randomly the options to show in the bubbles */
+    const RandomOptions = (dialogue_selection) => {
+        let optionsToShow = [];
+        const correctOption = dialogue_selection.answer;
+        let option_pos = 1;
+        let random_option;
+
+        optionsToShow[0] = correctOption;
+
+        while (option_pos < 3){
+            random_option = display.level2.options[Math.floor(Math.random() * display.level2.options.length)];
+            if (random_option != optionsToShow[0]){
+                optionsToShow[option_pos] = random_option;
+                option_pos++;
+            }
+        }
+        return {
+            optionsToShow
+        };
+    };
+
+    const handleSelect = (selectedOption) => {
+        if (isTransitioning) return;
+
+        setIsTransitioning(true);
+
+        const isCorrect = selectedOption === gameState.correctOption;
+        setLastSelectCorrect(isCorrect);
+
+        if (isCorrect) {
+            setScore((prev) => prev + 100);
+        }
+
+        playFeedback(isCorrect);
+
+        setTimeout(() => {
+            regenerate();
+            setIsTransitioning(false);
+        }, 2000);
+    };
+
   return (
     <GameShell bgImage={display.all_levels.background_image} score={score} onMenuClick={() => router.push("/")}>
         <button className={styles.button_repeat} onClick={repeatDialogue} aria-label="Repetir audio"> 🔊 </button>
         {gameState && (
             <>
-                <img src={gameState.customer} className={styles.customer} alt="customer"/>
+                <img src={gameState.customer} className={styles.customer} alt="customer" />
+                <OptionsBubbles
+                    options={gameState.optionsToShow}
+                    onSelect={handleSelect}
+                    disabled={isTransitioning}
+                />
             </>
         )}
         <img src={"/image/assets/counter.png"} className={styles.counter} alt="counter" draggable={false}/>
