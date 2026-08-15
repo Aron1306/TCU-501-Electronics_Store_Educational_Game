@@ -129,7 +129,9 @@ export const display = {
           audio_female: ["level2_text5_female1.mp3", "level2_text5_female2.mp3"],
           audio_male: ["level2_text5_male1.mp3"]
         },
-      ]
+      ],
+      options: ["We only have green phones here.", "This one is good for only 50 dollars!", "This one is fast and good for your studies.",        
+      "These are good for loud music.", "Yes, a million dollars please!"]
   },
   level3: {
       instructions: [
