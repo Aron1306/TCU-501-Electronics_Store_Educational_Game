@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import styles from "../page.module.css";
 
-export default function Bubble({ text, containerRef, onClick, disabled }) {
+export default function Bubble({ text, containerRef, onClick, disabled, status }) {
     const bubbleRef = useRef(null);
 
     const pos = useRef({
@@ -55,7 +55,7 @@ export default function Bubble({ text, containerRef, onClick, disabled }) {
             ref={bubbleRef}
             onClick={onClick}
             disabled={disabled}
-            className={styles.bubble}
+            className={`${styles.bubble} ${status === "correct" ? styles.bubble_correct : ""} ${status === "incorrect" ? styles.bubble_incorrect : ""}`}
         >
             {text}
         </button>

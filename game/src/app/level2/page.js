@@ -12,6 +12,7 @@ export default function Home() {
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [score, setScore] = useState(0);
     const [lastSelectCorrect, setLastSelectCorrect] = useState(null);
+    const [selectedOption, setSelectedOption] = useState(null);
 
     const dialogueAudioRef = useRef(null);
     const feedbackAudioRef = useRef(null);
@@ -139,9 +140,11 @@ export default function Home() {
         if (isTransitioning) return;
 
         setIsTransitioning(true);
+        setSelectedOption(selectedOption);
 
         const isCorrect = selectedOption === gameState.correctOption;
         setLastSelectCorrect(isCorrect);
+
 
         if (isCorrect) {
             setScore((prev) => prev + 100);
@@ -152,6 +155,7 @@ export default function Home() {
         setTimeout(() => {
             regenerate();
             setIsTransitioning(false);
+            setSelectedOption(null);
         }, 2000);
     };
 
@@ -165,6 +169,8 @@ export default function Home() {
                     options={gameState.optionsToShow}
                     onSelect={handleSelect}
                     disabled={isTransitioning}
+                    selectedOption={selectedOption}
+                    correctOption={gameState.correctOption}
                 />
             </>
         )}

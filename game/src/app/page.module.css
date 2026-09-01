@@ -421,3 +421,10 @@
   opacity: 0.6;
   cursor: default;
 }
+
+.bubble_correct {
+    background-color: #4caf50 !important;
+}
+.bubble_incorrect {
+    background-color: #f44336 !important;
+}
