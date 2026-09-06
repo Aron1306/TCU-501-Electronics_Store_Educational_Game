@@ -5,6 +5,7 @@ import styles from "../page.module.css";
 
 export default function OptionsBubbles({ options, onSelect, disabled, selectedOption, correctOption }) {
     const containerRef = useRef(null);
+    const bubblesRef = useRef([]);
 
     const getStatus = (opt) => {
         if (selectedOption === null) return "idle";
@@ -23,6 +24,8 @@ export default function OptionsBubbles({ options, onSelect, disabled, selectedOp
                     onClick={() => onSelect(opt)}
                     disabled={disabled}
                     status={getStatus(opt)}
+                    bubblesRef={bubblesRef}
+                    index={i}
                 />
             ))}
         </div>
