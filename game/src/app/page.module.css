@@ -377,3 +377,54 @@
   border-radius: 12px;
   pointer-events: none;
 }
+
+.bubbles_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  pointer-events: none;
+  z-index: 8;
+}
+
+.bubble {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  pointer-events: auto;
+
+  padding: 1.5vh 1.5vw;
+  border: 2px solid #37A3A5;
+  border-radius: 20px;
+
+  background-color: #fffdd0;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-weight: bold;
+  color: #000000;
+  cursor: pointer;
+
+  max-width: 220px;
+  text-align: center;
+}
+
+.bubble:hover {
+  box-shadow: 0px 6px 16px rgba(0,0,0,0.5);
+  border-color: #2c8082;
+}
+
+.bubble:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.bubble_correct {
+    background-color: #4caf50 !important;
+}
+.bubble_incorrect {
+    background-color: #f44336 !important;
+}

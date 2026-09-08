@@ -1,7 +1,7 @@
 export const display = {
   level1: {
       audio_prefix: "/audio/dialogue/level1/",
-      device_prefix: "/image/device/",
+      device_prefix: "/image/devices/",
       instructions: [
         "You will work as a clerk in an Electronics Store.",
         "Your job is to give each client the device they are looking for.",
@@ -129,7 +129,9 @@ export const display = {
           audio_female: ["level2_text5_female1.mp3", "level2_text5_female2.mp3"],
           audio_male: ["level2_text5_male1.mp3"]
         },
-      ]
+      ],
+      options: ["We only have green phones here.", "This one is good for only 50 dollars!", "This one is fast and good for your studies.",        
+      "These are good for loud music.", "Yes, a million dollars please!"]
   },
   level3: {
       instructions: [
@@ -172,7 +174,7 @@ export const display = {
   },
   level4: {
     audio_prefix: "/audio/dialogue/level4/",
-    device_prefix: "/image/device/",
+    device_prefix: "/image/devices/",
     instructions: [
       "You will work as a clerk in an Electronics Store.",
       "Your job is to explain to each client what the devices are for.",
@@ -191,7 +193,7 @@ export const display = {
           "You can call people",
           "You can send messages"
         ],
-        answer_audio: ["level4_answer1-1_male.mp3","level4_answer1-1_female.mp3", "level4_answer1-2_male.mp3", "level5_answer1-2_female.mp3"],
+        answer_audio: ["level4_answer1-1_male.mp3","level4_answer1-1_female.mp3", "level4_answer1-2_male.mp3", "level4_answer1-2_female.mp3"],
       },
       {
         device: "laptop",
@@ -200,7 +202,7 @@ export const display = {
           "You can do homework",
           "You can use the internet"
         ],
-        answer_audio: ["level4_answer2-1_male.mp3","level4_answer2-1_female.mp3", "level4_answer2-2_male.mp3", "level5_answer2-2_female.mp3"],
+        answer_audio: ["level4_answer2-1_male.mp3","level4_answer2-1_female.mp3", "level4_answer2-2_male.mp3", "level4_answer2-2_female.mp3"],
       },
       {
         device: "console",
@@ -209,7 +211,7 @@ export const display = {
           "You can play video games",
           "You can play with friends"
         ],
-        answer_audio: ["level4_answer3-1_male.mp3","level4_answer3-1_female.mp3", "level4_answer3-2_male.mp3", "level5_answer3-2_female.mp3"],
+        answer_audio: ["level4_answer3-1_male.mp3","level4_answer3-1_female.mp3", "level4_answer3-2_male.mp3", "level4_answer3-2_female.mp3"],
       },
       {
         device: "headphones",
@@ -227,8 +229,8 @@ export const display = {
           "You can watch videos",
           "You can play games"
         ],
-        answer_audio: ["level4_answer5-1_male.mp3","level4_answer5-1_female.mp3", "level4_answer5-2_male.mp3", "level5_answer5-2_female.mp3",
-          "level4_answer5-3_male.mp3", "level5_answer5-3_female.mp3"
+        answer_audio: ["level4_answer5-1_male.mp3","level4_answer5-1_female.mp3", "level4_answer5-2_male.mp3", "level4_answer5-2_female.mp3",
+          "level4_answer5-3_male.mp3", "level4_answer5-3_female.mp3"
         ],
       }
     ]
