@@ -3,13 +3,19 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { display } from "./display";
 import styles from "./page.module.css";
+import { preloadAllAssets } from "./preload";
 
 export default function Home() {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedLevel, setSelectecLevel] = useState(null);
+  const [assetsLoaded, setAssetsLoaded] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    preloadAllAssets(display).then(() => setAssetsLoaded(true));
+  }, []);
 
   /*For click sounds*/
   const clickSoundRef = useRef(null);
@@ -98,12 +104,13 @@ export default function Home() {
                 ))}
                 <button
                     className={styles.start_button}
+                    disabled={!assetsLoaded}
                     onClick={() => {
                         playClick();
                         router.push(`/level${selectedLevel}`);
                     }}
                 >
-                    Start
+                    {assetsLoaded ? "Start" : "Loading..."}
                 </button>
             </div>
         </div>
