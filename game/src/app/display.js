@@ -134,6 +134,7 @@ export const display = {
       "These are good for loud music.", "Yes, a million dollars please!"]
   },
   level3: {
+      background_image:"/image/assets/chat_bg.png",
       instructions: [
         "You will work as a clerk in an Electronics Store, but this time virtually.",
         "Your job is to answer each client and help them with what they are looking for.",
