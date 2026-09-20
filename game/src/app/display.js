@@ -148,30 +148,30 @@ export const display = {
       dialogue: [
         {
             text: "😊📱💬❓",
-            question: "Do you want a phone for messages?",
-            answer: "This phone is good for messages."
+            question: ["Do you want a phone", "for messages?"],
+            answer: ["This phone is ", "good for messages."] 
         },
         {
             text: "😊🎮💻❓",
-            question: "Do you like video games?",
-            answer: "This computer is good for games."
+            question: ["Do you like video ", "games"],
+            answer: ["This computer is ", "good for games"]
         },
         {
             text: "😊📚📱🌙❓",
-            question: "Do you want to read at night?",
-            answer: "This tablet is good for reading."
+            question: ["Do you want to ", "read at night?"],
+            answer: ["This tablet is ", "good for reading."]
         },
         {
             text: "😊🎧🎵🔊❓",
-            question: "Do you like music?",
-            answer: "These headphones are good for music."
+            question: ["Do you like listening ", "to music?"],
+            answer: ["These headphones are ", "good for music."]
         },
         {
             text: "😊📺🍿❓",
-            question: "Do you like watching movies?",
-            answer: "This TV is good for movies."
+            question: ["Do you like watching ", "movies?"],
+            answer: ["This TV is ", "good for movies."]
         }
-      ]
+      ],
   },
   level4: {
     audio_prefix: "/audio/dialogue/level4/",
