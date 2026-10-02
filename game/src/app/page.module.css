@@ -464,3 +464,77 @@
 .choiceButton:active {
     transform: scale(0.93);
 }
+
+.chat {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 24px;
+    width: 100%;
+    box-sizing: border-box;
+    align-self: stretch;
+}
+
+.bubble {
+    position: relative;
+    background: white;
+    color: black;
+    font-size: 2rem;
+    padding: 16px 28px;
+    border-radius: 32px;
+    max-width: 60%;
+    width: fit-content;
+    white-space: nowrap;
+}
+
+.bubbleClient {
+    align-self: flex-start;
+}
+
+.bubblePlayer {
+    align-self: flex-end;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    min-width: 120px;
+    min-height: 64px;
+    justify-content: center;
+}
+
+.bubbleClient::after,
+.bubblePlayer::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 16px solid white;
+}
+
+.bubbleClient::after {
+    left: -12px;
+    border-left: 16px solid transparent;
+}
+
+.bubblePlayer::after {
+    right: -12px;
+    border-right: 16px solid transparent;
+}
+
+.waiting_dot {
+    width: 12px;
+    height: 12px;
+    background: #999;
+    border-radius: 50%;
+    animation: blink 1.2s infinite;
+}
+
+.waiting_dot:nth-child(2) { animation-delay: 0.2s; }
+.waiting_dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+    0%, 80%, 100% { opacity: 0.3; }
+    40% { opacity: 1; }
+}

@@ -77,16 +77,17 @@ export default function Home() {
             onMenuClick={() => router.push("/")}
             stretchBg
         >
-            {request && (
-                <div
-                    onClick={() => setRequest(getRandomRequest())}
-                    style={{ position: "relative", zIndex: 10, background: "white", color: "black", padding: 16, cursor: "pointer" }}
-                >
-                    <p>Question: {JSON.stringify(request.questionChoiceParts)}</p>
-                    <p>Answer: {JSON.stringify(request.answerChoiceParts)}</p>
-                    <p>(click para generar otra)</p>
+            <div className={styles.chat}>
+                <div className={`${styles.bubble} ${styles.bubbleClient}`}>
+                    😊🎮💻❓
                 </div>
-            )}
+
+                <div className={`${styles.bubble} ${styles.bubblePlayer}`}>
+                    <span className={styles.waiting_dot}></span>
+                    <span className={styles.waiting_dot}></span>
+                    <span className={styles.waiting_dot}></span>
+                </div>
+            </div>
             <div className={styles.choiceBar}>
                 {(phase === "question" ? request?.questionChoiceParts : request?.answerChoiceParts)?.map((text, i) => (
                     <button
