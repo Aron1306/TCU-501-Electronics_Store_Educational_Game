@@ -10,6 +10,12 @@ export default function Home() {
     const [gameState, setGameState] = useState(null);
     const router = useRouter();
 
+    const [phase, setPhase] = useState("question");
+
+    const handleChoice = (text) => {
+        console.log("Elegido:", text);
+    };
+
     const getRandomRequest = () => {
         const randomDialogue = Math.floor(Math.random() * 5);
         const dialogue = display.level3.dialogue[randomDialogue];
@@ -81,6 +87,17 @@ export default function Home() {
                     <p>(click para generar otra)</p>
                 </div>
             )}
+            <div className={styles.choiceBar}>
+                {(phase === "question" ? request?.questionChoiceParts : request?.answerChoiceParts)?.map((text, i) => (
+                    <button
+                        key={i}
+                        className={styles.choiceButton}
+                        onClick={() => handleChoice(text)}
+                    >
+                        {text}
+                    </button>
+                ))}
+            </div>
         </GameShell>
     );
 }
