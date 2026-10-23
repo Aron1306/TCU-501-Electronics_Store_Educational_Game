@@ -7,13 +7,54 @@ import GameShell from "../components/gameshell"
 
 export default function Home() {
     const [score, setScore] = useState(0);
-    const [gameState, setGameState] = useState(null);
+    const POINTS = 10;
+    const [selected, setSelected] = useState([]);
+    const [locked, setLocked] = useState(false);
+    const hadMistake = useRef(false);
     const router = useRouter();
+    const FEEDBACK = { correct: "😊✅", wrong: "😢❌" };
+    const [feedback, setFeedback] = useState(null);
 
     const [phase, setPhase] = useState("question");
 
-    const handleChoice = (text) => {
-        console.log("Elegido:", text);
+    const handleChoice = (i) => {
+        if (locked || !request) return;
+
+        if (selected.includes(i)) {
+            setSelected(selected.filter((s) => s !== i));
+            return;
+        }
+
+        const next = [...selected, i];
+        setSelected(next);
+        if (next.length < 2) return;
+
+        const choices = phase === "question" ? request.questionChoiceParts : request.answerChoiceParts;
+        const correct = phase === "question" ? request.dialogue.question : request.dialogue.answer;
+        const picked = next.map((idx) => choices[idx]);
+        const isCorrect = picked[0] === correct[0] && picked[1] === correct[1];
+
+        setLocked(true);
+        setFeedback(isCorrect ? "correct" : "wrong");
+
+        setTimeout(() => {
+            setFeedback(null);
+            setSelected([]);
+            setLocked(false);
+
+            if (!isCorrect) {
+                hadMistake.current = true;
+                return;
+            }
+            if (phase === "question") {
+                setPhase("answer");
+            } else {
+                if (!hadMistake.current) setScore((s) => s + POINTS);
+                hadMistake.current = false;
+                setPhase("question");
+                setRequest(getRandomRequest()); // siguiente cliente
+            }
+        }, 1000);
     };
 
     const getRandomRequest = () => {
@@ -62,7 +103,7 @@ export default function Home() {
             };
             choicePos++;
         };   
-        return { questionChoiceParts, answerChoiceParts };
+        return { dialogue, questionChoiceParts, answerChoiceParts };
     };
 
     const [request, setRequest] = useState(null);
@@ -79,21 +120,32 @@ export default function Home() {
         >
             <div className={styles.chat}>
                 <div className={`${styles.bubble} ${styles.bubbleClient}`}>
-                    😊🎮💻❓
+                    {feedback ? FEEDBACK[feedback] : request?.dialogue.text}
                 </div>
 
                 <div className={`${styles.bubble} ${styles.bubblePlayer}`}>
-                    <span className={styles.waiting_dot}></span>
-                    <span className={styles.waiting_dot}></span>
-                    <span className={styles.waiting_dot}></span>
+                    {selected.length > 0 ? (
+                        (phase === "question" ? request.questionChoiceParts : request.answerChoiceParts)
+                            .filter((_, i) => selected.includes(i))
+                            .join(" ")
+                            .replace(/\s+/g, " ")
+                            .trim()
+                    ) : (
+                        <>
+                            <span className={styles.waiting_dot}></span>
+                            <span className={styles.waiting_dot}></span>
+                            <span className={styles.waiting_dot}></span>
+                        </>
+                    )}
                 </div>
             </div>
             <div className={styles.choiceBar}>
                 {(phase === "question" ? request?.questionChoiceParts : request?.answerChoiceParts)?.map((text, i) => (
                     <button
                         key={i}
-                        className={styles.choiceButton}
-                        onClick={() => handleChoice(text)}
+                        className={`${styles.choiceButton} ${selected.includes(i) ? styles.choiceSelected : ""}`}
+                        disabled={locked}
+                        onClick={() => handleChoice(i)}
                     >
                         {text}
                     </button>
