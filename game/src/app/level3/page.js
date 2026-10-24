@@ -13,9 +13,16 @@ export default function Home() {
     const hadMistake = useRef(false);
     const router = useRouter();
     const FEEDBACK = { correct: "😊✅", wrong: "😢❌" };
-    const [feedback, setFeedback] = useState(null);
+    const [messages, setMessages] = useState([]);
 
     const [phase, setPhase] = useState("question");
+
+    const chatRef = useRef(null);
+
+    useEffect(() => {
+        const el = chatRef.current;
+        if (el) el.scrollTop = el.scrollHeight;
+    }, [messages, selected]);
 
     const handleChoice = (i) => {
         if (locked || !request) return;
@@ -33,13 +40,17 @@ export default function Home() {
         const correct = phase === "question" ? request.dialogue.question : request.dialogue.answer;
         const picked = next.map((idx) => choices[idx]);
         const isCorrect = picked[0] === correct[0] && picked[1] === correct[1];
+        const playerText = picked.join(" ").replace(/\s+/g, " ").trim();
 
         setLocked(true);
-        setFeedback(isCorrect ? "correct" : "wrong");
+        setSelected([]);
+        setMessages((m) => [
+            ...m,
+            { from: "player", text: playerText },
+            { from: "client", text: isCorrect ? FEEDBACK.correct : FEEDBACK.wrong },
+        ]);
 
         setTimeout(() => {
-            setFeedback(null);
-            setSelected([]);
             setLocked(false);
 
             if (!isCorrect) {
@@ -52,9 +63,9 @@ export default function Home() {
                 if (!hadMistake.current) setScore((s) => s + POINTS);
                 hadMistake.current = false;
                 setPhase("question");
-                setRequest(getRandomRequest()); // siguiente cliente
+                startClient(); // siguiente cliente, limpia el historial
             }
-        }, 1000);
+        }, 1200);
     };
 
     const getRandomRequest = () => {
@@ -106,38 +117,52 @@ export default function Home() {
         return { dialogue, questionChoiceParts, answerChoiceParts };
     };
 
-    const [request, setRequest] = useState(null);
+    const startClient = () => {
+        const r = getRandomRequest();
+        setRequest(r);
+        setMessages([{ from: "client", text: r.dialogue.text }]);
+    };
 
     useEffect(() => {
-        setRequest(getRandomRequest());
+        startClient();
     }, []);
+
+    const [request, setRequest] = useState(null);
     return (
         <GameShell
             bgImage={display.level3.background_image}
             score={score}
             onMenuClick={() => router.push("/")}
             stretchBg
+            fixedHeight
         >
-            <div className={styles.chat}>
-                <div className={`${styles.bubble} ${styles.bubbleClient}`}>
-                    {feedback ? FEEDBACK[feedback] : request?.dialogue.text}
-                </div>
+            <div className={styles.chat} ref={chatRef}>
+                {messages.map((m, i) => (
+                    <div
+                        key={i}
+                        className={`${styles.bubble} ${m.from === "client" ? styles.bubbleClient : styles.bubblePlayer}`}
+                    >
+                        {m.text}
+                    </div>
+                ))}
 
-                <div className={`${styles.bubble} ${styles.bubblePlayer}`}>
-                    {selected.length > 0 ? (
-                        (phase === "question" ? request.questionChoiceParts : request.answerChoiceParts)
-                            .filter((_, i) => selected.includes(i))
-                            .join(" ")
-                            .replace(/\s+/g, " ")
-                            .trim()
-                    ) : (
-                        <>
-                            <span className={styles.waiting_dot}></span>
-                            <span className={styles.waiting_dot}></span>
-                            <span className={styles.waiting_dot}></span>
-                        </>
-                    )}
-                </div>
+                {!locked && (
+                    <div className={`${styles.bubble} ${styles.bubblePlayer}`}>
+                        {selected.length > 0 ? (
+                            (phase === "question" ? request.questionChoiceParts : request.answerChoiceParts)
+                                .filter((_, i) => selected.includes(i))
+                                .join(" ")
+                                .replace(/\s+/g, " ")
+                                .trim()
+                        ) : (
+                            <>
+                                <span className={styles.waiting_dot}></span>
+                                <span className={styles.waiting_dot}></span>
+                                <span className={styles.waiting_dot}></span>
+                            </>
+                        )}
+                    </div>
+                )}
             </div>
             <div className={styles.choiceBar}>
                 {(phase === "question" ? request?.questionChoiceParts : request?.answerChoiceParts)?.map((text, i) => (

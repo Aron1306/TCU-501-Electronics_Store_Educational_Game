@@ -14,6 +14,7 @@ export default function GameShell(props) {
     const endAudioRef = useRef(null);
 
     const stretchBg = props.stretchBg ?? false;
+    const fixedHeight = props.fixedHeight ?? false;
 
     /* Countdown */
     useEffect(() => {
@@ -53,7 +54,7 @@ export default function GameShell(props) {
 
     return (
         <div
-            className={`${styles.page} ${styles.page_main_menu}`}
+            className={`${styles.page} ${styles.page_main_menu} ${fixedHeight ? styles.pageFixed : ""}`}
             style={{
                 backgroundImage: `url('${bgImage}')`,
                 ...(stretchBg && {
