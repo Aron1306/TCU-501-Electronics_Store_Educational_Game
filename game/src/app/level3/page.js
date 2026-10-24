@@ -7,10 +7,10 @@ import GameShell from "../components/gameshell"
 
 export default function Home() {
     const [score, setScore] = useState(0);
-    const POINTS = 10;
     const [selected, setSelected] = useState([]);
     const [locked, setLocked] = useState(false);
-    const hadMistake = useRef(false);
+    const mistakes = useRef(0);
+    const POINTS = 10;
     const router = useRouter();
     const FEEDBACK = { correct: "😊✅", wrong: "😢❌" };
     const [messages, setMessages] = useState([]);
@@ -51,20 +51,23 @@ export default function Home() {
         ]);
 
         setTimeout(() => {
-            setLocked(false);
+        setLocked(false);
 
-            if (!isCorrect) {
-                hadMistake.current = true;
-                return;
-            }
-            if (phase === "question") {
-                setPhase("answer");
-            } else {
-                if (!hadMistake.current) setScore((s) => s + POINTS);
-                hadMistake.current = false;
-                setPhase("question");
-                startClient(); // siguiente cliente, limpia el historial
-            }
+        if (!isCorrect) {
+            mistakes.current += 1;
+            return;
+        }
+
+        const earned = Math.max(POINTS - mistakes.current * 3, 2);
+        setScore((s) => s + earned);
+        mistakes.current = 0;
+
+        if (phase === "question") {
+            setPhase("answer");
+        } else {
+            setPhase("question");
+            startClient();
+        }
         }, 1200);
     };
 
