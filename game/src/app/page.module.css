@@ -494,6 +494,7 @@
 
 .bubbleClient {
     align-self: flex-start;
+    border-bottom-left-radius: 6px;
 }
 
 .bubblePlayer {
@@ -504,26 +505,7 @@
     min-width: 120px;
     min-height: 64px;
     justify-content: center;
-}
-
-.bubbleClient::after,
-.bubblePlayer::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 0;
-    border-bottom: 16px solid white;
-}
-
-.bubbleClient::after {
-    left: -12px;
-    border-left: 16px solid transparent;
-}
-
-.bubblePlayer::after {
-    right: -12px;
-    border-right: 16px solid transparent;
+    border-bottom-right-radius: 6px;
 }
 
 .waiting_dot {
