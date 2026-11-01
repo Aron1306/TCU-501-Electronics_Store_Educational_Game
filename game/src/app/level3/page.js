@@ -19,10 +19,24 @@ export default function Home() {
 
     const chatRef = useRef(null);
 
+    const messageSound = useRef(null);
+
+    useEffect(() => {
+        messageSound.current = new Audio("/audio/708605__marevnik__ui_pop_up.mp3");
+    }, []);
+
     useEffect(() => {
         const el = chatRef.current;
         if (el) el.scrollTop = el.scrollHeight;
     }, [messages, selected]);
+
+    useEffect(() => {
+        if (messages.length === 0) return;
+        const audio = messageSound.current;
+        if (!audio) return;
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+    }, [messages]);
 
     const handleChoice = (i) => {
         if (locked || !request) return;
@@ -44,11 +58,14 @@ export default function Home() {
 
         setLocked(true);
         setSelected([]);
-        setMessages((m) => [
-            ...m,
-            { from: "player", text: playerText },
-            { from: "client", text: isCorrect ? FEEDBACK.correct : FEEDBACK.wrong },
-        ]);
+        setMessages((m) => [...m, { from: "player", text: playerText }]);
+
+        setTimeout(() => {
+            setMessages((m) => [
+                ...m,
+                { from: "client", text: isCorrect ? FEEDBACK.correct : FEEDBACK.wrong },
+            ]);
+        }, 500);
 
         setTimeout(() => {
         setLocked(false);
