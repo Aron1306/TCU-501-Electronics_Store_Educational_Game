@@ -21,6 +21,15 @@ export default function Home() {
 
     const messageSound = useRef(null);
 
+    const partAudio = useRef(null);
+
+    const playPartAudio = (file) => {
+        if (!file) return;
+        if (partAudio.current) partAudio.current.pause();
+        partAudio.current = new Audio(display.level3.audio_prefix + file);
+        partAudio.current.play().catch(() => {});
+    };
+
     useEffect(() => {
         messageSound.current = new Audio("/audio/708605__marevnik__ui_pop_up.mp3");
     }, []);
@@ -45,6 +54,9 @@ export default function Home() {
             setSelected(selected.filter((s) => s !== i));
             return;
         }
+
+        const choiceAudio = phase === "question" ? request.questionChoiceAudio : request.answerChoiceAudio;
+        playPartAudio(choiceAudio[i]);
 
         const next = [...selected, i];
         setSelected(next);
@@ -96,12 +108,20 @@ export default function Home() {
         let choicePos = 0;
         let dialoguePos = 0;
         let randomIncorrectDialogue;
+
+        let questionChoiceAudio = [null, null, null];
+        let answerChoiceAudio = [null, null, null];
+
         // Generate question fragment options
         while (true){
             randomIncorrectDialogue = Math.floor(Math.random() * 5);
 
             if (randomIncorrectDialogue !== randomDialogue){
-                questionChoiceParts[Math.floor(Math.random() * 3)] = display.level3.dialogue[randomIncorrectDialogue].question[Math.floor(Math.random() * 2)];
+                const pos = Math.floor(Math.random() * 3);
+                const part = Math.floor(Math.random() * 2);
+                const wrong = display.level3.dialogue[randomIncorrectDialogue];
+                questionChoiceParts[pos] = wrong.question[part];
+                questionChoiceAudio[pos] = wrong.question_audio[part];
                 break;
             };
         };
@@ -109,6 +129,7 @@ export default function Home() {
         while (choicePos < 3) {
             if (questionChoiceParts[choicePos] === " "){
                 questionChoiceParts[choicePos] = dialogue.question[dialoguePos];
+                questionChoiceAudio[choicePos] = dialogue.question_audio[dialoguePos];
                 dialoguePos++;
             };
             choicePos++;
@@ -122,7 +143,11 @@ export default function Home() {
             randomIncorrectDialogue = Math.floor(Math.random() * 5);
 
             if (randomIncorrectDialogue !== randomDialogue){
-                answerChoiceParts[Math.floor(Math.random() * 3)] = display.level3.dialogue[randomIncorrectDialogue].answer[Math.floor(Math.random() * 2)];
+                const pos = Math.floor(Math.random() * 3);
+                const part = Math.floor(Math.random() * 2);
+                const wrong = display.level3.dialogue[randomIncorrectDialogue];
+                answerChoiceParts[pos] = wrong.answer[part];
+                answerChoiceAudio[pos] = wrong.answer_audio[part];
                 break;
             };
         };
@@ -130,11 +155,13 @@ export default function Home() {
         while (choicePos < 3) {
             if (answerChoiceParts[choicePos] === " "){
                 answerChoiceParts[choicePos] = dialogue.answer[dialoguePos];
+                answerChoiceAudio[choicePos] = dialogue.answer_audio[dialoguePos];
                 dialoguePos++;
             };
             choicePos++;
-        };   
-        return { dialogue, questionChoiceParts, answerChoiceParts };
+        };        
+
+        return { dialogue, questionChoiceParts, answerChoiceParts, questionChoiceAudio, answerChoiceAudio };
     };
 
     const startClient = () => {
