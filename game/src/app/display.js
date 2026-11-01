@@ -134,6 +134,8 @@ export const display = {
       "These are good for loud music.", "Yes, a million dollars please!"]
   },
   level3: {
+      background_image:"/image/assets/chat_bg.png",
+      audio_prefix: "/audio/dialogue/level3/",
       instructions: [
         "You will work as a clerk in an Electronics Store, but this time virtually.",
         "Your job is to answer each client and help them with what they are looking for.",
@@ -147,30 +149,40 @@ export const display = {
       dialogue: [
         {
             text: "😊📱💬❓",
-            question: "Do you want a phone for messages?",
-            answer: "This phone is good for messages."
+            question: ["Do you want a phone", "for messages?"],
+            question_audio: ["level3_question1_part1.mp3", "level3_question1_part2.mp3"],
+            answer: ["This phone is ", "good for messages."],
+            answer_audio: ["level3_answer1_part1.mp3", "level3_answer1_part2.mp3"]
         },
         {
             text: "😊🎮💻❓",
-            question: "Do you like video games?",
-            answer: "This computer is good for games."
+            question: ["Do you like video ", "games?"],
+            question_audio: ["level3_question2_part1.mp3", "level3_question2_part2.mp3"],
+            answer: ["This computer is ", "good for games."],
+            answer_audio: ["level3_answer2_part1.mp3", "level3_answer2_part2.mp3"]
         },
         {
             text: "😊📚📱🌙❓",
-            question: "Do you want to read at night?",
-            answer: "This tablet is good for reading."
+            question: ["Do you want to ", "read at night?"],
+            question_audio: ["level3_question3_part1.mp3", "level3_question3_part2.mp3"],
+            answer: ["This tablet is ", "good for reading."],
+            answer_audio: ["level3_answer3_part1.mp3", "level3_answer3_part2.mp3"]
         },
         {
             text: "😊🎧🎵🔊❓",
-            question: "Do you like music?",
-            answer: "These headphones are good for music."
+            question: ["Do you like listening ", "to music?"],
+            question_audio: ["level3_question4_part1.mp3", "level3_question4_part2.mp3"],
+            answer: ["These headphones are ", "good for music."],
+            answer_audio: ["level3_answer4_part1.mp3", "level3_answer4_part2.mp3"]
         },
         {
             text: "😊📺🍿❓",
-            question: "Do you like watching movies?",
-            answer: "This TV is good for movies."
+            question: ["Do you like watching ", "movies?"],
+            question_audio: ["level3_question5_part1.mp3", "level3_question5_part2.mp3"],
+            answer: ["This TV is ", "good for movies."],
+            answer_audio: ["level3_answer5_part1.mp3", "level3_answer5_part2.mp3"]
         }
-      ]
+      ],
   },
   level4: {
     audio_prefix: "/audio/dialogue/level4/",

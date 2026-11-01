@@ -13,6 +13,9 @@ export default function GameShell(props) {
 
     const endAudioRef = useRef(null);
 
+    const stretchBg = props.stretchBg ?? false;
+    const fixedHeight = props.fixedHeight ?? false;
+
     /* Countdown */
     useEffect(() => {
         const timer = setInterval(() => {
@@ -50,7 +53,16 @@ export default function GameShell(props) {
     }, [showModal]);
 
     return (
-        <div className={`${styles.page} ${styles.page_main_menu}`} style={{ backgroundImage: `url('${bgImage}')` }}>
+        <div
+            className={`${styles.page} ${styles.page_main_menu} ${fixedHeight ? styles.pageFixed : ""}`}
+            style={{
+                backgroundImage: `url('${bgImage}')`,
+                ...(stretchBg && {
+                    backgroundSize: "100% 100%",
+                    backgroundRepeat: "no-repeat",
+                }),
+            }}
+        >
             <div className={styles.score}>Score: {score}</div>
             <div className={styles.timer}>{timeLeft}</div>
             <button className={`${styles.button} ${styles.button_back}`} onClick={onMenuClick}> Menu </button>

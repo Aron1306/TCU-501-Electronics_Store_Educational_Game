@@ -428,3 +428,124 @@
 .bubble_incorrect {
     background-color: #f44336 !important;
 }
+
+.level3 {
+  min-height: 100vh;
+  background-image: url('/images/level3-bg.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.choiceBar {
+    position: fixed;
+    bottom: 100;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px;
+    z-index: 10;
+}
+
+.choiceButton {
+    background-color: #fffdd0;
+    color: black;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 100px;
+    font-size: 2.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.choiceButton:active {
+    transform: scale(0.93);
+}
+
+.chat {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    width: 100%;
+    box-sizing: border-box;
+    align-self: stretch;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.bubble {
+    position: relative;
+    background: white;
+    color: black;
+    font-size: 2rem;
+    padding: 16px 28px;
+    border-radius: 32px;
+    max-width: 60%;
+    width: fit-content;
+    white-space: nowrap;
+}
+
+.bubbleClient {
+    align-self: flex-start;
+    border-bottom-left-radius: 6px;
+}
+
+.bubblePlayer {
+    align-self: flex-end;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    min-width: 120px;
+    min-height: 64px;
+    justify-content: center;
+    border-bottom-right-radius: 6px;
+}
+
+.waiting_dot {
+    width: 12px;
+    height: 12px;
+    background: #999;
+    border-radius: 50%;
+    animation: blink 1.2s infinite;
+}
+
+.waiting_dot:nth-child(2) { animation-delay: 0.2s; }
+.waiting_dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+    0%, 80%, 100% { opacity: 0.3; }
+    40% { opacity: 1; }
+}
+
+.choiceSelected {
+    background: #ffd86b;
+    transform: translateY(-3px);
+}
+
+.choiceButton:disabled {
+    cursor: default;
+}
+
+.pageFixed {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.pageFixed .chat {
+    position: absolute;
+    top: 130px;
+    bottom: 200px;
+    left: 0;
+    right: 0;
+    width: auto;
+    padding: 16px 24px;
+    overflow-y: auto;
+}
