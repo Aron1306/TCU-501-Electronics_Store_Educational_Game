@@ -153,7 +153,7 @@ export const display = {
         },
         {
             text: "😊🎮💻❓",
-            question: ["Do you like video ", "games"],
+            question: ["Do you like video ", "games?"],
             answer: ["This computer is ", "good for games"]
         },
         {
