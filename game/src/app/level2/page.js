@@ -5,6 +5,7 @@ import { display } from "../display";
 import { useRouter } from "next/navigation";
 import GameShell from "../components/gameshell"
 import OptionsBubbles from "../components/optionsBubbles";
+import { saveHighScore } from "../highscore";
 
 export default function Home() {
     const router = useRouter();
@@ -16,6 +17,10 @@ export default function Home() {
 
     const dialogueAudioRef = useRef(null);
     const feedbackAudioRef = useRef(null);
+
+    useEffect(() => {
+        if (score > 0) saveHighScore(2, score);
+    }, [score]);
 
     useEffect(() => {
         setGameState(RandomComponents());
