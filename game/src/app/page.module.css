@@ -560,4 +560,8 @@
 .highscore {
   color: white;
   font-weight: bold;
+  font-size: 1.4rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px 14px;
+  border-radius: 8px;
 }
