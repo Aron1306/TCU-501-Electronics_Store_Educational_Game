@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { display } from "./display";
 import styles from "./page.module.css";
 import { preloadAllAssets } from "./preload";
+import { getHighScore } from "./highscore";
 
 export default function Home() {
 
@@ -12,6 +13,17 @@ export default function Home() {
   const [assetsLoaded, setAssetsLoaded] = useState(false);
 
   const router = useRouter();
+
+  const [highScores, setHighScores] = useState({});
+
+  useEffect(() => {
+    setHighScores({
+      1: getHighScore(1),
+      2: getHighScore(2),
+      3: getHighScore(3),
+      4: getHighScore(4),
+    });
+  }, []);
 
   useEffect(() => {
     preloadAllAssets(display).then(() => setAssetsLoaded(true));
@@ -55,24 +67,36 @@ export default function Home() {
         <span className={styles.title_bottom}>Electronics Store</span>
       </h1>
       <div className={styles.level_button_array}>
-        <button className={`${styles.button} ${styles.button_level}`} onClick={() => {playClick(); setSelectecLevel(1); setShowModal(true)}}>
-          <div className={styles.dot} style={{ gridArea: "2 / 2" }}></div>
-        </button>
-        <button className={`${styles.button} ${styles.button_level}`} onClick={() => {playClick(); setSelectecLevel(2); setShowModal(true)}}>
-          <div className={styles.dot} style={{ gridArea: "1 / 1" }}></div>
-          <div className={styles.dot} style={{ gridArea: "3 / 3" }}></div>
-        </button>
-        <button className={`${styles.button} ${styles.button_level}`} onClick={() => {playClick(); setSelectecLevel(3); setShowModal(true)}}>
-          <div className={styles.dot} style={{ gridArea: "1 / 1" }}></div>
-          <div className={styles.dot} style={{ gridArea: "2 / 2" }}></div>
-          <div className={styles.dot} style={{ gridArea: "3 / 3" }}></div>
-        </button>
-        <button className={`${styles.button} ${styles.button_level}`} onClick={() => {playClick(); setSelectecLevel(4); setShowModal(true)}}>
-          <div className={styles.dot} style={{ gridArea: "1 / 1" }}></div>
-          <div className={styles.dot} style={{ gridArea: "1 / 3" }}></div>
-          <div className={styles.dot} style={{ gridArea: "3 / 1" }}></div>
-          <div className={styles.dot} style={{ gridArea: "3 / 3" }}></div>
-        </button>
+        <div className={styles.level_wrapper}>
+          <button className={`${styles.button} ${styles.button_level}`} onClick={() => {playClick(); setSelectecLevel(1); setShowModal(true)}}>
+            <div className={styles.dot} style={{ gridArea: "2 / 2" }}></div>
+          </button>
+          <span className={styles.highscore}>Best: {highScores[1] ?? 0}</span>
+        </div>
+        <div className={styles.level_wrapper}>
+          <button className={`${styles.button} ${styles.button_level}`} onClick={() => {playClick(); setSelectecLevel(2); setShowModal(true)}}>
+            <div className={styles.dot} style={{ gridArea: "1 / 1" }}></div>
+            <div className={styles.dot} style={{ gridArea: "3 / 3" }}></div>
+          </button>
+          <span className={styles.highscore}>Best: {highScores[2] ?? 0}</span>
+        </div>
+        <div className={styles.level_wrapper}>
+          <button className={`${styles.button} ${styles.button_level}`} onClick={() => {playClick(); setSelectecLevel(3); setShowModal(true)}}>
+            <div className={styles.dot} style={{ gridArea: "1 / 1" }}></div>
+            <div className={styles.dot} style={{ gridArea: "2 / 2" }}></div>
+            <div className={styles.dot} style={{ gridArea: "3 / 3" }}></div>
+          </button>
+          <span className={styles.highscore}>Best: {highScores[3] ?? 0}</span>
+        </div>
+        <div className={styles.level_wrapper}>
+          <button className={`${styles.button} ${styles.button_level}`} onClick={() => {playClick(); setSelectecLevel(4); setShowModal(true)}}>
+            <div className={styles.dot} style={{ gridArea: "1 / 1" }}></div>
+            <div className={styles.dot} style={{ gridArea: "1 / 3" }}></div>
+            <div className={styles.dot} style={{ gridArea: "3 / 1" }}></div>
+            <div className={styles.dot} style={{ gridArea: "3 / 3" }}></div>
+          </button>
+          <span className={styles.highscore}>Best: {highScores[4] ?? 0}</span>
+        </div>
       </div>
       <button className={`${styles.button} ${styles.button_help}`} onClick={playClick}>
         <span className={styles.help_text}>?</span>

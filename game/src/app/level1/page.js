@@ -4,6 +4,7 @@ import styles from "../page.module.css";
 import { display } from "../display";
 import { useRouter } from "next/navigation";
 import GameShell from "../components/gameshell"
+import { saveHighScore } from "../highscore";
 
 export default function Home() {
     const router = useRouter();
@@ -18,6 +19,10 @@ export default function Home() {
     useEffect(() => {
         setGameState(RandomComponents());
     }, []);
+
+    useEffect(() => {
+        if (score > 0) saveHighScore(1, score);
+    }, [score]);
 
     /* Play the audio track of the next customer */
     useEffect(() => {

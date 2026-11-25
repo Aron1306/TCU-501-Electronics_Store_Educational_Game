@@ -4,6 +4,7 @@ import styles from "../page.module.css";
 import { display } from "../display";
 import { useRouter } from "next/navigation";
 import GameShell from "../components/gameshell"
+import { saveHighScore } from "../highscore";
 
 export default function Home() {
     const [score, setScore] = useState(0);
@@ -22,6 +23,10 @@ export default function Home() {
     const messageSound = useRef(null);
 
     const partAudio = useRef(null);
+
+    useEffect(() => {
+        if (score > 0) saveHighScore(3, score);
+    }, [score]);
 
     const playPartAudio = (file) => {
         if (!file) return;
